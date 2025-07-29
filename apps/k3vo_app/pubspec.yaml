@@ -1,0 +1,33 @@
+name: k3vo
+description: Cross-platform domain management app for KeNIC's Hack-A-Milli competition.
+version: 2025.7.0+1
+homepage: https://app.k3vo.me.ke
+repository: https://github.com/kevinomyonga/k3vo-platform-client/tree/main/apps/k3vo_app
+publish_to: none
+
+environment:
+  sdk: ^3.8.0
+
+dependencies:
+  bloc: ^9.0.0
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^9.1.1
+
+  k3vo_foundation: ^2025.7.0
+  k3vo_localization: ^2025.7.0
+  k3vo_router: ^2025.7.0
+  k3vo_ui_kit: ^2025.7.0
+
+dev_dependencies:
+  bloc_test: ^10.0.0
+  flutter_launcher_icons: ^0.14.4
+  flutter_native_splash: ^2.4.6
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.4
+  very_good_analysis: ^9.0.0
+
+flutter:
+  generate: true
+  uses-material-design: true

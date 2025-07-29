@@ -1,0 +1,69 @@
+# FVM Version Cache
+.fvm/
+
+# Miscellaneous
+*.class
+*.lock
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/*
+
+# Visual Studio Code related
+.classpath
+.project
+.settings/
+.vscode/*
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+
+# Coverage
+coverage/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Melos related
+**/**/**/pubspec_overrides.yaml
+.idea
+
+# Fastlane
+**/fastlane/report.xml
+**/fastlane/changelog.txt
+
+# Exceptions to the above rules.
+!.idea/codeStyles/
+!.idea/dictionaries/
+!.idea/runConfigurations/
+!.vscode/extensions.json
+!.vscode/launch.json
+
+# service account json files
+*firebase-adminsdk.json
+
+# dotenv environment variables file
+.env
+env.g.dart

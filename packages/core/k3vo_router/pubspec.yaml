@@ -1,0 +1,29 @@
+name: k3vo_router
+description: A Flutter routing package for managing in-app navigation in the K3VO platform client app.
+version: 2025.7.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.8.0
+  flutter: ^3.32.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  go_router: ^16.0.0
+
+  # k3vo_account: ^2025.7.0
+  # k3vo_authentication: ^2025.7.0
+  # k3vo_communication: ^2025.7.0
+  k3vo_home: ^2025.7.0
+  # k3vo_location_picker: ^2025.7.0
+  # k3vo_notifications: ^2025.7.0
+  # k3vo_profile: ^2025.7.0
+  # k3vo_settings: ^2025.7.0
+  # k3vo_wallet: ^2025.7.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.4
+  very_good_analysis: ^9.0.0

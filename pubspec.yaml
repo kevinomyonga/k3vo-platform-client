@@ -1,0 +1,9 @@
+name: k3vo_platform_client_workspace
+description: Root package for Melos
+publish_to: none
+
+environment:
+  sdk: ">=3.3.3 <4.0.0"
+
+dev_dependencies:
+  melos: ^6.3.3

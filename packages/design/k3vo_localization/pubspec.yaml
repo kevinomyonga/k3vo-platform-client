@@ -1,0 +1,28 @@
+name: k3vo_localization
+description: A Flutter package that contains localization components for the K3VO platform client app
+version: 2025.7.0+1
+homepage: https://github.com/kevinomyonga/k3vo-platform-client/tree/main/packages/design/k3vo_localization
+publish_to: none
+
+environment:
+  sdk: ^3.8.0
+  flutter: ^3.32.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.20.2
+
+  k3vo_foundation: ^2025.7.0
+
+dev_dependencies:
+  build_runner: any
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.4
+  very_good_analysis: ^9.0.0
+
+flutter:
+  generate: true

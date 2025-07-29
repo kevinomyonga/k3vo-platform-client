@@ -1,0 +1,22 @@
+name: k3vo_home
+description: A Flutter package that contains Home UI components for the K3VO platform client app.
+version: 2025.7.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.8.0
+  flutter: ^3.32.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  k3vo_foundation: ^2025.7.0
+  k3vo_router: ^2025.7.0
+  k3vo_ui_kit: ^2025.7.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.4
+  very_good_analysis: ^9.0.0
