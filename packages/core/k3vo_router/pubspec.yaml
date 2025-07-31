@@ -19,7 +19,7 @@ dependencies:
   # k3vo_location_picker: ^2025.7.0
   # k3vo_notifications: ^2025.7.0
   # k3vo_profile: ^2025.7.0
-  # k3vo_settings: ^2025.7.0
+  k3vo_settings: ^2025.7.0
   # k3vo_wallet: ^2025.7.0
 
 dev_dependencies:

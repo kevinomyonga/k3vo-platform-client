@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-class HomeMainScreen extends StatelessWidget {
-  const HomeMainScreen({super.key});
+class DiscoverScreen extends StatelessWidget {
+  const DiscoverScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

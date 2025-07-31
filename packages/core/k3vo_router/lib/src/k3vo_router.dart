@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:k3vo_router/k3vo_router.dart';
+import 'package:k3vo_router/src/routes/modules/settings_routes.dart';
 
 /// {@template k3vo_router}
 /// A Flutter routing package for managing in-app navigation in the K3VO platform client app.
@@ -14,6 +15,7 @@ class K3voRouter {
       initialLocation: HomeRouteNames.home,
       routes: [
         ...homeRoutes,
+        ...settingsRoutes,
       ],
       // redirect: (context, state) {
       //   final loggingIn = state.fullPath == AuthRouteNames.login;

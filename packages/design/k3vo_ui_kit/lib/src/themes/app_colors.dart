@@ -9,16 +9,7 @@ class AppColors {
   static const MaterialColor primaryTealColor = Colors.green;
 
   /// The primary purple color used in the app.
-  static const MaterialColor primaryPurpleColor = Colors.purple;
-
-  /// The primary amber color used in the app.
-  static const MaterialColor primaryAmberColor = Colors.yellow;
-
-  /// The primary blue color used in the app.
-  static const MaterialColor primaryBlueColor = Colors.blue;
-
-  /// The primary red color used in the app.
-  static const MaterialColor primaryRedColor = Colors.deepOrange;
+  static const MaterialColor primaryPurpleColor = Colors.red;
 
   /// Opacity level for glass-like effects.
   static const glassOpacity = 0.3;

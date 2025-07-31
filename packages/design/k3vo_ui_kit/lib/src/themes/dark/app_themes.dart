@@ -49,48 +49,12 @@ class AppDarkThemes extends AppThemes {
     );
   }
 
-  /// Returns the dark theme with an amber color scheme.
-  ThemeData get amberThemeDark {
-    final base = themeData;
-    return base.copyWith(
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: AppColors.primaryAmberColor,
-        brightness: Brightness.dark,
-      ),
-    );
-  }
-
-  /// Returns the dark theme with a blue color scheme.
-  ThemeData get blueThemeDark {
-    final base = themeData;
-    return base.copyWith(
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: AppColors.primaryBlueColor,
-        brightness: Brightness.dark,
-      ),
-    );
-  }
-
-  /// Returns the dark theme with a red color scheme.
-  ThemeData get redThemeDark {
-    final base = themeData;
-    return base.copyWith(
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: AppColors.primaryRedColor,
-        brightness: Brightness.dark,
-      ),
-    );
-  }
-
   /// Provides a collection of dark themes for the application.
   ThemeCollection get themeCollectionDark {
     return ThemeCollection(
       themes: {
-        AppThemes.ryokugyu: tealThemeDark,
-        AppThemes.fujitora: purpleThemeDark,
-        AppThemes.kizaru: amberThemeDark,
-        AppThemes.aokiji: blueThemeDark,
-        AppThemes.akainu: redThemeDark,
+        AppThemes.green: tealThemeDark,
+        AppThemes.red: purpleThemeDark,
       },
       // Optional fallback theme, default value is ThemeData.dark()
       fallbackTheme: ThemeData.dark(),
