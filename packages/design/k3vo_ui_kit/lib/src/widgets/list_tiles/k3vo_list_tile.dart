@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MotyBaseListTile extends StatelessWidget {
-  const MotyBaseListTile({
+class K3voListTile extends StatelessWidget {
+  const K3voListTile({
     required this.title,
     this.subtitle,
     this.leadingIcon,

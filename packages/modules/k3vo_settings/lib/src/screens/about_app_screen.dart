@@ -64,12 +64,12 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 32),
-              MotyBaseListTile(
+              K3voListTile(
                 leadingIcon: FontAwesomeIcons.globe,
                 title: 'Visit Website',
                 onTap: _proceedToAppWebsite,
               ),
-              MotyBaseListTile(
+              K3voListTile(
                 leadingIcon: FontAwesomeIcons.code,
                 title: 'About The Developer',
                 onTap: _proceedToDeveloperWebsite,
@@ -80,17 +80,17 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
                 type: K3voTextType.labelLarge,
               ),
               const SizedBox(height: 8),
-              MotyBaseListTile(
+              K3voListTile(
                 leadingIcon: FontAwesomeIcons.scaleBalanced,
                 title: context.k3voL10n.termsOfService,
                 onTap: _proceedToTerms,
               ),
-              MotyBaseListTile(
+              K3voListTile(
                 leadingIcon: Icons.privacy_tip_outlined,
                 title: context.k3voL10n.privacyPolicy,
                 onTap: _proceedToPrivacyPolicy,
               ),
-              MotyBaseListTile(
+              K3voListTile(
                 leadingIcon: Icons.copyright,
                 title: 'Open Source Licenses',
                 showDivider: true,

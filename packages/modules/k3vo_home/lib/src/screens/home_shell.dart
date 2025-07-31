@@ -17,7 +17,7 @@ class _HomeShellState extends State<HomeShell> {
   static const List<String> _routes = [
     HomeRouteNames.home,
     HomeRouteNames.search,
-    HomeRouteNames.generate,
+    HomeRouteNames.generator,
     HomeRouteNames.myDomains,
     HomeRouteNames.more,
   ];
@@ -39,15 +39,15 @@ class _HomeShellState extends State<HomeShell> {
       ),
       const NavigationDestination(
         icon: Icon(Icons.search),
-        label: 'Search',
+        label: 'Lookup',
       ),
       const NavigationDestination(
         icon: Icon(Icons.auto_awesome_outlined),
-        label: 'Generate',
+        label: 'Generator',
       ),
       const NavigationDestination(
         icon: Icon(Icons.bookmarks_outlined),
-        label: 'My Domains',
+        label: 'Domains',
       ),
       const NavigationDestination(
         icon: Icon(Icons.more_horiz),
@@ -62,15 +62,15 @@ class _HomeShellState extends State<HomeShell> {
       ),
       const NavigationRailDestination(
         icon: Icon(Icons.search),
-        label: Text('Search'),
+        label: Text('Lookup'),
       ),
       const NavigationRailDestination(
         icon: Icon(Icons.auto_awesome_outlined),
-        label: Text('Generate'),
+        label: Text('Generator'),
       ),
       const NavigationRailDestination(
         icon: Icon(Icons.bookmarks_outlined),
-        label: Text('My Domains'),
+        label: Text('Domains'),
       ),
       const NavigationRailDestination(
         icon: Icon(Icons.more_horiz),

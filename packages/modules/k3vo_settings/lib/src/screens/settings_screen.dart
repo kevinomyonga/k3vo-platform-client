@@ -25,7 +25,7 @@ class SettingsScreen extends StatelessWidget {
             const Divider(),
             const ThemeModeSelectorWidget(),
             const Divider(),
-            MotyBaseListTile(
+            K3voListTile(
               title: context.k3voL10n.language,
               subtitle: context
                   .watch<LanguageCubit>()
@@ -48,7 +48,7 @@ class SettingsScreen extends StatelessWidget {
   ///
   /// This method creates a menu item for selecting the app's theme.
   Widget _buildThemeMenu(BuildContext context) {
-    return MotyBaseListTile(
+    return K3voListTile(
       leadingIcon: Icons.color_lens,
       title: 'Theme',
       subtitle: const AppThemes().toStr(

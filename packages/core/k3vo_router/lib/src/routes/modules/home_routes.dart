@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:k3vo_generator/k3vo_generator.dart';
 // import 'package:motybase_account/motybase_account.dart';
 // import 'package:motybase_communication/motybase_communication.dart';
 import 'package:k3vo_home/k3vo_home.dart';
@@ -24,8 +25,8 @@ final homeRoutes = [
         builder: (context, state) => const DiscoverScreen(),
       ),
       GoRoute(
-        path: HomeRouteNames.generate,
-        builder: (context, state) => const AboutAppScreen(),
+        path: HomeRouteNames.generator,
+        builder: (context, state) => const GeneratorWizardScreen(),
       ),
       GoRoute(
         path: HomeRouteNames.myDomains,

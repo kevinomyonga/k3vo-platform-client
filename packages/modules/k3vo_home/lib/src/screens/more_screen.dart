@@ -84,17 +84,17 @@ class MoreScreen extends StatelessWidget {
           type: K3voTextType.labelLarge,
         ),
         const SizedBox(height: 8),
-        MotyBaseListTile(
+        K3voListTile(
           leadingIcon: Icons.person,
           title: 'Personal Information',
           onTap: () {},
         ),
-        MotyBaseListTile(
+        K3voListTile(
           leadingIcon: FontAwesomeIcons.commentDots,
           title: context.k3voL10n.reviews,
           onTap: () {},
         ),
-        MotyBaseListTile(
+        K3voListTile(
           leadingIcon: Icons.group,
           title: 'Emergency Contacts',
           onTap: () {},
@@ -112,12 +112,12 @@ class MoreScreen extends StatelessWidget {
           type: K3voTextType.labelLarge,
         ),
         const SizedBox(height: 8),
-        MotyBaseListTile(
+        K3voListTile(
           leadingIcon: Icons.lock,
           title: 'Change Password',
           onTap: () {},
         ),
-        MotyBaseListTile(
+        K3voListTile(
           leadingIcon: Icons.fingerprint,
           title: 'Biometric Login',
           switchValue: true,
@@ -136,26 +136,21 @@ class MoreScreen extends StatelessWidget {
           type: K3voTextType.labelLarge,
         ),
         const SizedBox(height: 8),
-        MotyBaseListTile(
+        K3voListTile(
           leadingIcon: Icons.settings,
           title: 'Settings',
           onTap: () {
             getNavigationService().push(SettingsRouteNames.settings);
           },
         ),
-        MotyBaseListTile(
-          leadingIcon: Icons.sync_alt,
-          title: 'Switch Mode',
-          onTap: () {},
-        ),
-        MotyBaseListTile(
+        K3voListTile(
           leadingIcon: Icons.share_outlined,
           title: 'Invite Friends',
           onTap: () {
             _inviteFriend(context);
           },
         ),
-        MotyBaseListTile(
+        K3voListTile(
           leadingIcon: Icons.info_outline,
           title: 'About MotyBase',
           onTap: () {
@@ -163,7 +158,7 @@ class MoreScreen extends StatelessWidget {
           },
         ),
         const Divider(),
-        MotyBaseListTile(
+        K3voListTile(
           leadingIcon: Icons.logout,
           title: 'Logout',
           color: Colors.red,
