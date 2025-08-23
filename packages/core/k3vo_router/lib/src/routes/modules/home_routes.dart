@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:k3vo_generator/k3vo_generator.dart';
-// import 'package:motybase_account/motybase_account.dart';
-// import 'package:motybase_communication/motybase_communication.dart';
 import 'package:k3vo_home/k3vo_home.dart';
 import 'package:k3vo_router/k3vo_router.dart';
-import 'package:k3vo_settings/k3vo_settings.dart';
-// import 'package:motybase_profile/motybase_profile.dart';
-// import 'package:motybase_router/src/routes/routes.dart';
 
 final homeRoutes = [
   ShellRoute(
@@ -22,7 +17,7 @@ final homeRoutes = [
       ),
       GoRoute(
         path: HomeRouteNames.search,
-        builder: (context, state) => const DiscoverScreen(),
+        builder: (context, state) => const LookupScreen(),
       ),
       GoRoute(
         path: HomeRouteNames.generator,
@@ -30,7 +25,7 @@ final homeRoutes = [
       ),
       GoRoute(
         path: HomeRouteNames.myDomains,
-        builder: (context, state) => const SettingsScreen(),
+        builder: (context, state) => const DomainsScreen(),
       ),
       GoRoute(
         path: HomeRouteNames.more,

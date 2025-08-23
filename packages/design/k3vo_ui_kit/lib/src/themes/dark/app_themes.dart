@@ -1,4 +1,3 @@
-import 'package:adaptive_chameleon_theme/adaptive_chameleon_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:k3vo_ui_kit/k3vo_ui_kit.dart';
@@ -27,25 +26,48 @@ class AppDarkThemes extends AppThemes {
     );
   }
 
-  /// Returns the dark theme with a teal color scheme.
-  ThemeData get tealThemeDark {
+  /// Returns the dark theme with a green color scheme.
+  ThemeData get greenThemeDark {
     final base = themeData;
     return base.copyWith(
       colorScheme: ColorScheme.fromSeed(
-        seedColor: AppColors.primaryTealColor,
+        seedColor: AppColors.primaryGreenColor,
         brightness: Brightness.dark,
       ),
     );
   }
 
-  /// Returns the dark theme with a purple color scheme.
-  ThemeData get purpleThemeDark {
+  /// Returns the dark theme with a red color scheme.
+  ThemeData get redThemeDark {
     final base = themeData;
     return base.copyWith(
       colorScheme: ColorScheme.fromSeed(
-        seedColor: AppColors.primaryPurpleColor,
+        seedColor: AppColors.primaryRedColor,
         brightness: Brightness.dark,
       ),
+    );
+  }
+
+  /// Returns the dark theme with a black color scheme.
+  ThemeData get blackThemeDark {
+    final base = themeData;
+    return base.copyWith(
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: const Color(0xFF121212), // near-black seed
+      ),
+      scaffoldBackgroundColor: Colors.black, // force OLED black bg
+    );
+  }
+
+  /// Returns the dark theme with a white color scheme.
+  ThemeData get whiteThemeDark {
+    final base = themeData;
+    return base.copyWith(
+      brightness: Brightness.light,
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: const Color(0xFFFAFAFA), // near-white seed
+      ),
+      scaffoldBackgroundColor: Colors.white, // force white bg
     );
   }
 
@@ -53,8 +75,10 @@ class AppDarkThemes extends AppThemes {
   ThemeCollection get themeCollectionDark {
     return ThemeCollection(
       themes: {
-        AppThemes.green: tealThemeDark,
-        AppThemes.red: purpleThemeDark,
+        AppThemes.green: greenThemeDark,
+        AppThemes.red: redThemeDark,
+        AppThemes.black: blackThemeDark,
+        AppThemes.white: whiteThemeDark,
       },
       // Optional fallback theme, default value is ThemeData.dark()
       fallbackTheme: ThemeData.dark(),

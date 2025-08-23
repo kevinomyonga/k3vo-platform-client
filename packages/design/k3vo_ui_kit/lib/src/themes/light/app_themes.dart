@@ -66,39 +66,64 @@ class AppThemes {
     );
   }
 
-  /// Returns the light theme with a teal color scheme.
+  /// Returns the light theme with a green color scheme.
   ///
-  /// Uses [AppColors.primaryTealColor] as the primary color.
-  ThemeData get tealTheme {
+  /// Uses [AppColors.primaryGreenColor] as the primary color.
+  ThemeData get greenTheme {
     final base = themeData;
     return base.copyWith(
       colorScheme: ColorScheme.fromSeed(
-        seedColor: AppColors.primaryTealColor,
+        seedColor: AppColors.primaryGreenColor,
       ),
     );
   }
 
-  /// Returns the light theme with a purple color scheme.
+  /// Returns the light theme with a red color scheme.
   ///
-  /// Uses [AppColors.primaryPurpleColor] as the primary color.
-  ThemeData get purpleTheme {
+  /// Uses [AppColors.primaryRedColor] as the primary color.
+  ThemeData get redTheme {
     final base = themeData;
     return base.copyWith(
       colorScheme: ColorScheme.fromSeed(
-        seedColor: AppColors.primaryPurpleColor,
+        seedColor: AppColors.primaryRedColor,
       ),
+    );
+  }
+
+  /// Returns the light theme with a black color scheme.
+  ThemeData get blackTheme {
+    final base = themeData;
+    return base.copyWith(
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: const Color(0xFF121212), // near-black seed
+        brightness: Brightness.dark,
+      ),
+      scaffoldBackgroundColor: Colors.black, // force OLED black bg
+    );
+  }
+
+  /// Returns the light theme with a white color scheme.
+  ThemeData get whiteTheme {
+    final base = themeData;
+    return base.copyWith(
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: const Color(0xFFFAFAFA), // near-white seed
+      ),
+      scaffoldBackgroundColor: Colors.white, // force white bg
     );
   }
 
   /// Provides a collection of themes for the application.
   ///
-  /// Includes themes for teal, purple, amber, blue, and red color schemes.
+  /// Includes themes for green, red, white, and black color schemes.
   /// Sets a fallback theme as [ThemeData.light].
   ThemeCollection get themeCollection {
     return ThemeCollection(
       themes: {
-        green: tealTheme,
-        red: purpleTheme,
+        green: greenTheme,
+        red: redTheme,
+        black: blackTheme,
+        white: whiteTheme,
       },
       // Optional fallback theme, default value is ThemeData.light()
       fallbackTheme: ThemeData.light(),
