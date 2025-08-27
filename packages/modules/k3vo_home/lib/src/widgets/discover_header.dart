@@ -121,16 +121,17 @@ class DiscoverHeader extends StatelessWidget {
                             _getGreeting(),
                             style: const TextStyle(
                               color: Colors.white,
-                              fontSize: 24,
+                              fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           const SizedBox(height: 4),
                           const Text(
-                            'Discover your next adventure.',
+                            'Kevin O.',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 16,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ],
@@ -149,8 +150,7 @@ class DiscoverHeader extends StatelessWidget {
 class WaveClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-    final path = Path()
-    ..lineTo(0, size.height);
+    final path = Path()..lineTo(0, size.height);
 
     final firstEndPoint = Offset(size.width / 2, size.height - 30);
     final firstControlPoint = Offset(size.width / 4, size.height - 53);
@@ -162,16 +162,16 @@ class WaveClipper extends CustomClipper<Path> {
     );
     final secondEndPoint = Offset(size.width, size.height - 90);
     final secondControlPoint = Offset(size.width * 3 / 4, size.height - 14);
-    path..quadraticBezierTo(
-      secondControlPoint.dx,
-      secondControlPoint.dy,
-      secondEndPoint.dx,
-      secondEndPoint.dy,
-    )
-
-    ..lineTo(size.width, size.height)
-    ..lineTo(size.width, 0)
-    ..close();
+    path
+      ..quadraticBezierTo(
+        secondControlPoint.dx,
+        secondControlPoint.dy,
+        secondEndPoint.dx,
+        secondEndPoint.dy,
+      )
+      ..lineTo(size.width, size.height)
+      ..lineTo(size.width, 0)
+      ..close();
 
     return path;
   }
