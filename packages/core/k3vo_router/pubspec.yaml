@@ -12,6 +12,7 @@ dependencies:
     sdk: flutter
   go_router: ^16.0.0
   
+  k3vo_auth: ^2025.7.0
   k3vo_generator: ^2025.7.0
   k3vo_home: ^2025.7.0
   k3vo_settings: ^2025.7.0

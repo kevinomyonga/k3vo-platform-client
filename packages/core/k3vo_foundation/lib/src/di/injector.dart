@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
+import 'package:k3vo_auth/k3vo_auth.dart';
 import 'package:k3vo_foundation/src/bloc/language/language.dart';
 // import 'package:k3vo_foundation/src/di/injector.config.dart';
 import 'package:k3vo_foundation/src/services/date_formatter.dart';
@@ -24,7 +25,9 @@ Future<void> setupDependencies() async {
     // Register DateFormatter implementation
     ..registerLazySingleton<DateFormatter>(K3voDateFormatter.new)
     // Register LanguageCubit implementation
-    ..registerLazySingleton<LanguageCubit>(LanguageCubit.new);
+    ..registerLazySingleton<LanguageCubit>(LanguageCubit.new)
+    // Register AuthBloc implementation
+    ..registerLazySingleton<AuthBloc>(AuthBloc.new);
 }
 
 /// Internal getter for accessing registered services within foundation.

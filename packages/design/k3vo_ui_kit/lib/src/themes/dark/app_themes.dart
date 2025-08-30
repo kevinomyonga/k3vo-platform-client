@@ -48,37 +48,12 @@ class AppDarkThemes extends AppThemes {
     );
   }
 
-  /// Returns the dark theme with a black color scheme.
-  ThemeData get blackThemeDark {
-    final base = themeData;
-    return base.copyWith(
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: const Color(0xFF121212), // near-black seed
-      ),
-      scaffoldBackgroundColor: Colors.black, // force OLED black bg
-    );
-  }
-
-  /// Returns the dark theme with a white color scheme.
-  ThemeData get whiteThemeDark {
-    final base = themeData;
-    return base.copyWith(
-      brightness: Brightness.light,
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: const Color(0xFFFAFAFA), // near-white seed
-      ),
-      scaffoldBackgroundColor: Colors.white, // force white bg
-    );
-  }
-
   /// Provides a collection of dark themes for the application.
   ThemeCollection get themeCollectionDark {
     return ThemeCollection(
       themes: {
         AppThemes.green: greenThemeDark,
         AppThemes.red: redThemeDark,
-        AppThemes.black: blackThemeDark,
-        AppThemes.white: whiteThemeDark,
       },
       // Optional fallback theme, default value is ThemeData.dark()
       fallbackTheme: ThemeData.dark(),

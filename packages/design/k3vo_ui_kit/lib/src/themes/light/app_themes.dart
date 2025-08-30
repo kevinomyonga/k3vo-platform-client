@@ -90,29 +90,6 @@ class AppThemes {
     );
   }
 
-  /// Returns the light theme with a black color scheme.
-  ThemeData get blackTheme {
-    final base = themeData;
-    return base.copyWith(
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: const Color(0xFF121212), // near-black seed
-        brightness: Brightness.dark,
-      ),
-      scaffoldBackgroundColor: Colors.black, // force OLED black bg
-    );
-  }
-
-  /// Returns the light theme with a white color scheme.
-  ThemeData get whiteTheme {
-    final base = themeData;
-    return base.copyWith(
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: const Color(0xFFFAFAFA), // near-white seed
-      ),
-      scaffoldBackgroundColor: Colors.white, // force white bg
-    );
-  }
-
   /// Provides a collection of themes for the application.
   ///
   /// Includes themes for green, red, white, and black color schemes.
@@ -122,8 +99,6 @@ class AppThemes {
       themes: {
         green: greenTheme,
         red: redTheme,
-        black: blackTheme,
-        white: whiteTheme,
       },
       // Optional fallback theme, default value is ThemeData.light()
       fallbackTheme: ThemeData.light(),

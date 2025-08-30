@@ -36,17 +36,12 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
-    - assets/animations/
     - assets/images/
     - assets/images/backgrounds/
-    - assets/images/badges/
     - assets/images/branding/
     - assets/images/icons/
     - assets/images/icons/language/
     - assets/images/icons/launcher/
-    - assets/images/icons/markers/
-    - assets/images/services/
-    - assets/styles/
     - assets/videos/
 
 flutter_gen:

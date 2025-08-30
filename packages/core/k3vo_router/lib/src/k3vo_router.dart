@@ -12,8 +12,9 @@ class K3voRouter {
   /// Creates the configured GoRouter instance for the app.
   static GoRouter createRouter({bool isLoggedIn = false}) {
     return GoRouter(
-      initialLocation: HomeRouteNames.home,
+      initialLocation: AuthRouteNames.auth,
       routes: [
+        ...authRoutes,
         ...homeRoutes,
         ...settingsRoutes,
       ],

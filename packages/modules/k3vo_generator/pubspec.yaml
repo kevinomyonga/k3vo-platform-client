@@ -1,6 +1,6 @@
 name: k3vo_generator
 description: A Flutter package that contains Domain Generator UI components for the K3VO platform client app.
-version: 0.1.0+1
+version: 2025.7.0+1
 publish_to: none
 
 environment:

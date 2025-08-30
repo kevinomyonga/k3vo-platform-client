@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:k3vo_foundation/k3vo_foundation.dart';
 import 'package:k3vo_generator/src/models/generator_options.dart';
 import 'package:k3vo_generator/src/screens/suggestions_list.dart';
 import 'package:k3vo_generator/src/services/services.dart';
@@ -19,7 +20,9 @@ class _GeneratorWizardScreenState extends State<GeneratorWizardScreen> {
   final locationController = TextEditingController();
   final keywordController = TextEditingController();
   // final openAiService = OpenAIService('openai-api-key');
-  final geminiService = GeminiService('gemini-api-key');
+  final geminiService = GeminiService(
+    K3voFoundation.env.geminiApiKey,
+  );
   List<Map<String, dynamic>> suggestions = [];
   bool isLoading = false;
 
@@ -152,7 +155,7 @@ class _GeneratorWizardScreenState extends State<GeneratorWizardScreen> {
                 onCheckAvailability: (domain) {
                   // You can integrate WHOIS check here
                   ScaffoldMessenger.of(context).showSnackBar(
-                     SnackBar(content: Text('Checking $domain...')),
+                    SnackBar(content: Text('Checking $domain...')),
                   );
                 },
               ),
