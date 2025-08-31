@@ -27,30 +27,24 @@ jobs:
           FLUTTER_VERSION=$(jq -r '.flutter' .fvmrc)
           echo "FLUTTER_VERSION=$FLUTTER_VERSION" >> $GITHUB_ENV
 
-      # Setup Flutter
+      # Setup Flutter (just to get Dart available for FVM)
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: ${{ env.FLUTTER_VERSION }}
+          flutter-version: "stable"
           cache: true
 
       # Install FVM using Flutter's Dart
       - name: Install FVM
         run: flutter pub global activate fvm
 
-      # Read Flutter version from .fvmrc and install via FVM
+      # Install Flutter version via FVM
       - name: Install Flutter via FVM
-        run: |
-          FLUTTER_VERSION=$(jq -r '.flutter' .fvmrc)
-          echo "Flutter version: $FLUTTER_VERSION"
-          fvm install $FLUTTER_VERSION
-
-      - name: FVM Flutter Doctor
-        run: fvm flutter doctor
+        run: fvm install ${{ env.FLUTTER_VERSION }}
 
       # Add FVM Flutter to PATH
       - name: Setup FVM Flutter PATH
-        run: echo "$PWD/.fvm/flutter_sdk/bin" >> $GITHUB_PATH
+        run: echo "${{ github.workspace }}/.fvm/flutter_sdk/bin" >> $GITHUB_PATH
 
       # Cache Melos dependencies
       - name: Cache Melos
