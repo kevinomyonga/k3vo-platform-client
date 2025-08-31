@@ -2,3 +2,4 @@
 library;
 
 export 'src/k3vo_data.dart';
+export 'src/whois/whois.dart';

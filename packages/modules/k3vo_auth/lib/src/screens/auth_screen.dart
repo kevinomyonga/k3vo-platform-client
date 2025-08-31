@@ -69,13 +69,10 @@ class _AuthScreenState extends State<AuthScreen> {
                                   child: const K3voLogo(),
                                 ),
                                 const SizedBox(height: 10),
-                                const Text(
-                                  'Your ideas, domains, simplified.',
-                                  style: TextStyle(
-                                    color: Colors.white70,
-                                    fontSize: 18,
-                                  ),
-                                  textAlign: TextAlign.center,
+                                const K3voText(
+                                  text: 'Access. Connection. Ownership',
+                                  color: Colors.white70,
+                                  type: K3voTextType.headlineSmall,
                                 ),
                               ],
                             ),

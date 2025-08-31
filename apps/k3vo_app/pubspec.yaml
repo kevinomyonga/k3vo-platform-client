@@ -1,6 +1,6 @@
 name: k3vo
 description: Cross-platform domain management app for KeNIC's Hack-A-Milli competition.
-version: 2025.7.0+1
+version: 2025.8.0+1
 homepage: https://app.k3vo.me.ke
 repository: https://github.com/kevinomyonga/k3vo-platform-client/tree/main/apps/k3vo_app
 publish_to: none

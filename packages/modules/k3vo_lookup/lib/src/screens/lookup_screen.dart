@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:k3vo_data/k3vo_data.dart';
 
 class LookupScreen extends StatefulWidget {
   const LookupScreen({super.key});
@@ -9,8 +10,11 @@ class LookupScreen extends StatefulWidget {
 
 class _LookupScreenState extends State<LookupScreen> {
   final TextEditingController _controller = TextEditingController();
+  final WhoisRepository _repo = WhoisRepository();
+
   bool _isLoading = false;
-  String? _result;
+  Map<String, dynamic>? _data;
+  String? _error;
 
   Future<void> _lookupDomain() async {
     final query = _controller.text.trim();
@@ -18,26 +22,37 @@ class _LookupScreenState extends State<LookupScreen> {
 
     setState(() {
       _isLoading = true;
-      _result = null;
+      _data = null;
+      _error = null;
     });
 
-    // Simulate API request
-    await Future.delayed(const Duration(seconds: 2));
+    try {
+      final result = await _repo.lookupDomain(query);
 
-    setState(() {
-      _isLoading = false;
-      _result = query.endsWith('.com')
-          ? '✅ $query is available!'
-          : '❌ $query is already registered.\n\nRegistrant: John Doe\nRegistrar: Example Registrar\nCreated: 2021-05-12';
-    });
+      if (result.containsKey('error')) {
+        setState(() {
+          _error = result['error'] as String?;
+        });
+      } else {
+        setState(() {
+          _data = result;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _error = e.toString();
+      });
+    } finally {
+      setState(() => _isLoading = false);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    final isWide = MediaQuery.of(context).size.width > 600;
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Domain Lookup'),
-      ),
+      appBar: AppBar(title: const Text('Domain Lookup')),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -45,9 +60,9 @@ class _LookupScreenState extends State<LookupScreen> {
             TextField(
               controller: _controller,
               decoration: InputDecoration(
-                labelText: 'Enter domain name',
+                labelText: 'Enter Domain Name',
                 hintText: 'e.g. example.com',
-                prefixIcon: const Icon(Icons.search),
+                prefixIcon: const Icon(Icons.domain),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -69,18 +84,118 @@ class _LookupScreenState extends State<LookupScreen> {
             const SizedBox(height: 24),
             if (_isLoading)
               const CircularProgressIndicator()
-            else if (_result != null)
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Text(
-                  _result!,
-                  style: const TextStyle(fontSize: 16),
+            else if (_error != null)
+              Text(
+                _error!,
+                style: const TextStyle(color: Colors.red, fontSize: 16),
+              )
+            else if (_data != null)
+              Expanded(
+                child: SingleChildScrollView(
+                  child: isWide
+                      ? Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(child: _buildDomainInfo(_data!)),
+                            const SizedBox(width: 16),
+                            Expanded(child: _buildRegistrantInfo(_data!)),
+                          ],
+                        )
+                      : Column(
+                          children: [
+                            SizedBox(
+                              width: double.infinity,
+                              child: _buildDomainInfo(_data!),
+                            ),
+                            const SizedBox(height: 16),
+                            SizedBox(
+                              width: double.infinity,
+                              child: _buildRegistrantInfo(_data!),
+                            ),
+                          ],
+                        ),
                 ),
               ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDomainInfo(Map<String, dynamic> data) {
+    final domain = data['domain'];
+    if (domain == null) return const SizedBox();
+
+    final isAvailable = data.containsKey('error');
+
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      elevation: 3,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              domain['domain'] as String? ?? '',
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              isAvailable ? '✅ Available to purchase' : '❌ Already registered',
+              style: TextStyle(
+                color: isAvailable ? Colors.green : Colors.red,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 12),
+            if (!isAvailable) ...[
+              Text("Created: ${domain['created_date']}"),
+              Text("Updated: ${domain['updated_date']}"),
+              Text("Expires: ${domain['expiration_date']}"),
+              const SizedBox(height: 8),
+              Text("Status: ${(domain['status'] as List).join(', ')}"),
+              const SizedBox(height: 8),
+              Text(
+                "Name Servers: ${(domain['name_servers'] as List).join(', ')}",
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRegistrantInfo(Map<String, dynamic> data) {
+    final registrant = data['registrant'];
+    final registrar = data['registrar'];
+
+    if (registrant == null || registrar == null) return const SizedBox();
+
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      elevation: 3,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Registrant Info',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            Text("Name: ${registrant['name']}"),
+            Text("Email: ${registrant['email']}"),
+            Text("Phone: ${registrant['phone']}"),
+            Text("Country: ${registrant['country']}"),
+            const SizedBox(height: 12),
+            const Text(
+              'Registrar',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            Text("Name: ${registrar['name']}"),
+            Text("Email: ${registrar['email']}"),
+            Text("Phone: ${registrar['phone']}"),
           ],
         ),
       ),
