@@ -723,6 +723,12 @@ abstract class AppLocalizations {
   /// **'Register'**
   String get register;
 
+  /// No description provided for @registrarSelector_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a Registrar'**
+  String get registrarSelector_title;
+
   /// No description provided for @reviews.
   ///
   /// In en, this message translates to:

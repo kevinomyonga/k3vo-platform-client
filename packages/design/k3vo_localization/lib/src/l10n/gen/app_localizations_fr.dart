@@ -358,6 +358,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get register => 'S\'inscrire';
 
   @override
+  String get registrarSelector_title => 'Choisissez un registraire';
+
+  @override
   String get reviews => 'Avis';
 
   @override

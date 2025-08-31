@@ -358,6 +358,9 @@ class AppLocalizationsSw extends AppLocalizations {
   String get register => 'Jisajili';
 
   @override
+  String get registrarSelector_title => 'Chagua Msajili';
+
+  @override
   String get reviews => 'Mapitio';
 
   @override

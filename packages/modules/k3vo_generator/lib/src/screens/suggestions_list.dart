@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:k3vo_data/k3vo_data.dart';
+import 'package:k3vo_generator/k3vo_generator.dart';
 import 'package:k3vo_ui_kit/k3vo_ui_kit.dart';
 import 'package:k3vo_foundation/k3vo_foundation.dart'; // for context.k3voL10n
 
@@ -67,32 +68,27 @@ class _SuggestionsListState extends State<SuggestionsList> {
               onPressed: () => _checkDomain(domain),
               child: Text(context.k3voL10n.suggestionsList_checkButton),
             );
-            break;
           case DomainStatus.checking:
             trailing = const SizedBox(
               width: 24,
               height: 24,
               child: CircularProgressIndicator(strokeWidth: 2),
             );
-            break;
           case DomainStatus.available:
             trailing = Tooltip(
               message: context.k3voL10n.suggestionsList_status_available,
               child: const Icon(Icons.check_circle, color: Colors.green),
             );
-            break;
           case DomainStatus.taken:
             trailing = Tooltip(
               message: context.k3voL10n.suggestionsList_status_taken,
               child: const Icon(Icons.cancel, color: Colors.red),
             );
-            break;
           case DomainStatus.error:
             trailing = Tooltip(
               message: context.k3voL10n.suggestionsList_status_error,
               child: const Icon(Icons.error, color: Colors.orange),
             );
-            break;
         }
 
         return ListTile(
@@ -102,6 +98,7 @@ class _SuggestionsListState extends State<SuggestionsList> {
           ),
           subtitle: rationale != null ? Text(rationale) : null,
           trailing: trailing,
+          onTap: () => showRegistrarBottomSheet(context, domain),
         );
       },
     );
