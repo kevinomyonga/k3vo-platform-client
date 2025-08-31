@@ -41,8 +41,6 @@ flutter:
     - assets/images/branding/
     - assets/images/icons/
     - assets/images/icons/language/
-    - assets/images/icons/launcher/
-    - assets/videos/
 
 flutter_gen:
   assets:

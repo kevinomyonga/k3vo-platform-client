@@ -62,14 +62,14 @@ jobs:
       - name: Melos Bootstrap
         run: melos bootstrap
 
+      # Create .env file
+      - name: Create .env file
+        run: echo "GEMINI_API_KEY=$GEMINI_API_KEY" >> apps/k3vo_app/.env
+
       # Build Flutter Web
       - name: Build Flutter Web
         run: fvm flutter build web --release -t lib/main_production.dart
         working-directory: apps/k3vo_app
-
-      # Create .env file
-      - name: Create .env file
-        run: echo "GEMINI_API_KEY=$GEMINI_API_KEY" >> apps/k3vo_app/.env
 
       # Deploy to Firebase Hosting (preview channel)
       - name: Deploy to Firebase Hosting Preview
