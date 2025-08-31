@@ -29,6 +29,21 @@ jobs:
           flutter-version: ${{ env.FLUTTER_VERSION }}
           cache: true
 
+      # Install FVM using Flutter's Dart
+      - name: Install FVM
+        run: flutter pub global activate fvm
+
+      # Read Flutter version from .fvmrc and install via FVM
+      - name: Install Flutter via FVM
+        run: |
+          FLUTTER_VERSION=$(jq -r '.flutter' .fvmrc)
+          echo "Flutter version: $FLUTTER_VERSION"
+          fvm install $FLUTTER_VERSION
+
+      # Add FVM Flutter to PATH
+      - name: Setup FVM Flutter PATH
+        run: echo "$PWD/.fvm/flutter_sdk/bin" >> $GITHUB_PATH
+
       # Cache Melos dependencies
       - name: Cache Melos
         uses: actions/cache@v3
