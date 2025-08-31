@@ -50,7 +50,7 @@ class SettingsScreen extends StatelessWidget {
   Widget _buildThemeMenu(BuildContext context) {
     return K3voListTile(
       leadingIcon: Icons.color_lens,
-      title: 'Theme',
+      title: context.k3voL10n.theme,
       subtitle: const AppThemes().toStr(
         AdaptiveChameleonTheme.of(context).themeId,
       ),
@@ -61,26 +61,19 @@ class SettingsScreen extends StatelessWidget {
   }
 
   void _setRandomTheme(BuildContext context) {
-    // Define the list of theme IDs
     const themeIds = <int>[
       AppThemes.green,
       AppThemes.red,
     ];
 
-    // Get the currently active theme ID
     final currentThemeId = AdaptiveChameleonTheme.of(context).themeId;
 
     int randomThemeId;
-
     do {
-      // Generate a random index
       final randomIndex = Random().nextInt(themeIds.length);
-
-      // Select a random theme ID from the list
       randomThemeId = themeIds[randomIndex];
     } while (randomThemeId == currentThemeId);
 
-    // Set the theme using the new random theme ID
     AdaptiveChameleonTheme.of(context).setTheme(randomThemeId);
   }
 }

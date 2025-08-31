@@ -13,7 +13,7 @@ class MoreScreen extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
-          const SliverAppBar(title: Text('Account')),
+          SliverAppBar(title: Text(context.k3voL10n.more)),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
@@ -59,12 +59,13 @@ class MoreScreen extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 12),
+        // TODO: Replace with dynamic user data instead of hardcoding
         const K3voText(
           text: 'Kevin Omyonga',
           type: K3voTextType.titleMedium,
         ),
         const K3voText(
-          text: 'kevin@motybase.com',
+          text: 'kevin@gmail.com',
           type: K3voTextType.bodyMedium,
         ),
       ],
@@ -75,28 +76,28 @@ class MoreScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const K3voText(
-          text: 'Other',
+        K3voText(
+          text: context.k3voL10n.other,
           type: K3voTextType.labelLarge,
         ),
         const SizedBox(height: 8),
         K3voListTile(
           leadingIcon: Icons.settings,
-          title: 'Settings',
+          title: context.k3voL10n.settings,
           onTap: () {
             getNavigationService().push(SettingsRouteNames.settings);
           },
         ),
         K3voListTile(
           leadingIcon: Icons.share_outlined,
-          title: 'Invite Friends',
+          title: context.k3voL10n.inviteFriends,
           onTap: () {
             _inviteFriend(context);
           },
         ),
         K3voListTile(
           leadingIcon: Icons.info_outline,
-          title: 'About MotyBase',
+          title: context.k3voL10n.aboutK3vo,
           onTap: () {
             getNavigationService().push(SettingsRouteNames.about);
           },
@@ -104,7 +105,7 @@ class MoreScreen extends StatelessWidget {
         const Divider(),
         K3voListTile(
           leadingIcon: Icons.logout,
-          title: 'Logout',
+          title: context.k3voL10n.logout,
           color: Colors.red,
           onTap: _proceedToSignOut,
         ),
@@ -112,8 +113,6 @@ class MoreScreen extends StatelessWidget {
     );
   }
 
-  /// Launches an app selection popup to select the app to be used for sharing
-  /// a link to MotyBase.
   void _inviteFriend(BuildContext context) {
     String appLink;
 
@@ -132,7 +131,6 @@ class MoreScreen extends StatelessWidget {
     );
   }
 
-  /// Initiates the sign out process.
   void _proceedToSignOut() {
     getNavigationService().push(AuthRouteNames.auth);
   }

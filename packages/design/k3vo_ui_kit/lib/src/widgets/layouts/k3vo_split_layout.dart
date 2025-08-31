@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:split_screen/split_screen.dart';
 
-class MotyBaseSplitLayout extends StatelessWidget {
-  const MotyBaseSplitLayout({
+class K3voSplitLayout extends StatelessWidget {
+  const K3voSplitLayout({
     required this.startPane,
     required this.endPane,
     this.scrollable,

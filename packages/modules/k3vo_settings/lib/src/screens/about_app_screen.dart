@@ -34,7 +34,7 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
       appBar: AppBar(
         title: Text(context.k3voL10n.about),
       ),
-      body: MotyBaseSplitLayout(
+      body: K3voSplitLayout(
         scrollable: true,
         startPane: Center(
           child: Column(
@@ -66,17 +66,17 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
               const SizedBox(height: 32),
               K3voListTile(
                 leadingIcon: FontAwesomeIcons.globe,
-                title: 'Visit Website',
+                title: context.k3voL10n.visitWebsite,
                 onTap: _proceedToAppWebsite,
               ),
               K3voListTile(
                 leadingIcon: FontAwesomeIcons.code,
-                title: 'About The Developer',
+                title: context.k3voL10n.aboutTheDeveloper,
                 onTap: _proceedToDeveloperWebsite,
               ),
               const SizedBox(height: 24),
-              const K3voText(
-                text: 'Legal',
+              K3voText(
+                text: context.k3voL10n.legal,
                 type: K3voTextType.labelLarge,
               ),
               const SizedBox(height: 8),
@@ -92,7 +92,7 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
               ),
               K3voListTile(
                 leadingIcon: Icons.copyright,
-                title: 'Open Source Licenses',
+                title: context.k3voL10n.openSourceLicenses,
                 showDivider: true,
                 onTap: () {
                   showLicensePage(context: context);
@@ -125,9 +125,9 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
                   textAlign: TextAlign.center,
                 ),
               ),
-              const Center(
+              Center(
                 child: K3voText(
-                  text: 'All Rights Reserved.',
+                  text: context.k3voL10n.allRightsReserved,
                   type: K3voTextType.labelLarge,
                   textAlign: TextAlign.center,
                 ),
@@ -139,27 +139,22 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
     );
   }
 
-  /// Opens the MotyBase website
   void _proceedToAppWebsite() {
     UrlLauncherHelper.launchWebUrl(AppConstants.appWebsiteUrl);
   }
 
-  /// Opens the developer website
   void _proceedToDeveloperWebsite() {
     UrlLauncherHelper.launchWebUrl(AppConstants.appDeveloperWebsite);
   }
 
-  /// Opens the Terms of Service page
   void _proceedToTerms() {
     UrlLauncherHelper.launchWebUrl(AppConstants.termsOfServiceUrl);
   }
 
-  /// Opens the Privacy Policy page
   void _proceedToPrivacyPolicy() {
     UrlLauncherHelper.launchWebUrl(AppConstants.privacyPolicyUrl);
   }
 
-  /// Shows the License page
   void showLicensePage({
     @required BuildContext? context,
     String? applicationName,
@@ -172,9 +167,7 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
       MaterialPageRoute<void>(
         builder: (BuildContext context) => LicensePage(
           applicationName: context.k3voL10n.appName,
-          applicationVersion:
-              '$version '
-              '($buildNumber)',
+          applicationVersion: '$version ($buildNumber)',
           applicationLegalese: '© ${DateTime.now().year}',
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:k3vo_data/k3vo_data.dart';
+import 'package:k3vo_foundation/k3vo_foundation.dart';
 
 class LookupScreen extends StatefulWidget {
   const LookupScreen({super.key});
@@ -50,9 +51,10 @@ class _LookupScreenState extends State<LookupScreen> {
   @override
   Widget build(BuildContext context) {
     final isWide = MediaQuery.of(context).size.width > 600;
+    final l10n = context.k3voL10n;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Domain Lookup')),
+      appBar: AppBar(title: Text(l10n.lookupScreen_title)),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -60,8 +62,8 @@ class _LookupScreenState extends State<LookupScreen> {
             TextField(
               controller: _controller,
               decoration: InputDecoration(
-                labelText: 'Enter Domain Name',
-                hintText: 'e.g. example.com',
+                labelText: l10n.lookupScreen_enterDomain,
+                hintText: l10n.lookupScreen_enterDomainHint,
                 prefixIcon: const Icon(Icons.domain),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -73,7 +75,7 @@ class _LookupScreenState extends State<LookupScreen> {
             ElevatedButton.icon(
               onPressed: _isLoading ? null : _lookupDomain,
               icon: const Icon(Icons.search),
-              label: const Text('Check'),
+              label: Text(l10n.lookupScreen_checkButton),
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size.fromHeight(50),
                 shape: RoundedRectangleBorder(
@@ -83,10 +85,10 @@ class _LookupScreenState extends State<LookupScreen> {
             ),
             const SizedBox(height: 24),
             if (_isLoading)
-              const CircularProgressIndicator()
+              Center(child: Text(l10n.lookupScreen_loading))
             else if (_error != null)
               Text(
-                _error!,
+                context.k3voL10n.lookupScreen_error(_error!),
                 style: const TextStyle(color: Colors.red, fontSize: 16),
               )
             else if (_data != null)
@@ -96,21 +98,21 @@ class _LookupScreenState extends State<LookupScreen> {
                       ? Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Expanded(child: _buildDomainInfo(_data!)),
+                            Expanded(child: _buildDomainInfo(_data!, l10n)),
                             const SizedBox(width: 16),
-                            Expanded(child: _buildRegistrantInfo(_data!)),
+                            Expanded(child: _buildRegistrantInfo(_data!, l10n)),
                           ],
                         )
                       : Column(
                           children: [
                             SizedBox(
                               width: double.infinity,
-                              child: _buildDomainInfo(_data!),
+                              child: _buildDomainInfo(_data!, l10n),
                             ),
                             const SizedBox(height: 16),
                             SizedBox(
                               width: double.infinity,
-                              child: _buildRegistrantInfo(_data!),
+                              child: _buildRegistrantInfo(_data!, l10n),
                             ),
                           ],
                         ),
@@ -122,11 +124,14 @@ class _LookupScreenState extends State<LookupScreen> {
     );
   }
 
-  Widget _buildDomainInfo(Map<String, dynamic> data) {
+  Widget _buildDomainInfo(Map<String, dynamic> data, dynamic l10n) {
     final domain = data['domain'];
-    if (domain == null) return const SizedBox();
+    final hasError = data.containsKey('error');
+    final query = _controller.text.trim();
 
-    final isAvailable = data.containsKey('error');
+    final isAvailable = hasError && _isValidDomainFormat(query);
+
+    String formatList(List<dynamic> list) => list.join(', ');
 
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -137,27 +142,55 @@ class _LookupScreenState extends State<LookupScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              domain['domain'] as String? ?? '',
+              query,
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
             Text(
-              isAvailable ? '✅ Available to purchase' : '❌ Already registered',
+              isAvailable
+                  ? context.k3voL10n.lookupScreen_available
+                  : context.k3voL10n.lookupScreen_registered,
               style: TextStyle(
                 color: isAvailable ? Colors.green : Colors.red,
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 12),
-            if (!isAvailable) ...[
-              Text("Created: ${domain['created_date']}"),
-              Text("Updated: ${domain['updated_date']}"),
-              Text("Expires: ${domain['expiration_date']}"),
-              const SizedBox(height: 8),
-              Text("Status: ${(domain['status'] as List).join(', ')}"),
+            if (!isAvailable && domain != null) ...[
+              Text(
+                context.k3voL10n.lookupScreen_created(
+                  (domain['created_date'] ?? '').toString(),
+                ),
+              ),
+              Text(
+                context.k3voL10n.lookupScreen_updated(
+                  (domain['updated_date'] ?? '').toString(),
+                ),
+              ),
+              Text(
+                context.k3voL10n.lookupScreen_expires(
+                  (domain['expiration_date'] ?? '').toString(),
+                ),
+              ),
               const SizedBox(height: 8),
               Text(
-                "Name Servers: ${(domain['name_servers'] as List).join(', ')}",
+                context.k3voL10n.lookupScreen_status(
+                  formatList(
+                    (domain['status'] is List)
+                        ? domain['status'] as List<dynamic>
+                        : [],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                context.k3voL10n.lookupScreen_nameServers(
+                  formatList(
+                    domain['name_servers'] is List
+                        ? domain['name_servers'] as List<dynamic>
+                        : [],
+                  ),
+                ),
               ),
             ],
           ],
@@ -166,7 +199,85 @@ class _LookupScreenState extends State<LookupScreen> {
     );
   }
 
-  Widget _buildRegistrantInfo(Map<String, dynamic> data) {
+  // Widget _buildDomainInfo(Map<String, dynamic> data, dynamic l10n) {
+  //   final domain = data['domain'];
+  //   if (domain == null) return const SizedBox();
+
+  //   final hasError = data.containsKey('error');
+
+  //   // Domain is available if WHOIS returned an error, but the domain format is valid
+  //   final isAvailable =
+  //       hasError && _isValidDomainFormat(_controller.text.trim());
+
+  //   String formatList(List<dynamic> list) => list.join(', ');
+
+  //   return Card(
+  //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+  //     elevation: 3,
+  //     child: Padding(
+  //       padding: const EdgeInsets.all(16),
+  //       child: Column(
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: [
+  //           Text(
+  //             domain['domain'] as String? ?? '',
+  //             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+  //           ),
+  //           const SizedBox(height: 8),
+  //           Text(
+  //             isAvailable
+  //                 ? context.k3voL10n.lookupScreen_available
+  //                 : context.k3voL10n.lookupScreen_registered,
+  //             style: TextStyle(
+  //               color: isAvailable ? Colors.green : Colors.red,
+  //               fontWeight: FontWeight.bold,
+  //             ),
+  //           ),
+  //           const SizedBox(height: 12),
+  //           if (!isAvailable) ...[
+  //             Text(
+  //               context.k3voL10n.lookupScreen_created(
+  //                 (domain['created_date'] ?? '').toString(),
+  //               ),
+  //             ),
+  //             Text(
+  //               context.k3voL10n.lookupScreen_updated(
+  //                 (domain['updated_date'] ?? '').toString(),
+  //               ),
+  //             ),
+  //             Text(
+  //               context.k3voL10n.lookupScreen_expires(
+  //                 (domain['expiration_date'] ?? '').toString(),
+  //               ),
+  //             ),
+  //             const SizedBox(height: 8),
+  //             Text(
+  //               context.k3voL10n.lookupScreen_status(
+  //                 formatList(
+  //                   (domain['status'] is List)
+  //                       ? domain['status'] as List<dynamic>
+  //                       : [],
+  //                 ),
+  //               ),
+  //             ),
+  //             const SizedBox(height: 8),
+  //             Text(
+  //               context.k3voL10n.lookupScreen_nameServers(
+  //                 formatList(
+  //                   domain['name_servers'] is List
+  //                       ? domain['name_servers'] as List<dynamic>
+  //                       : [],
+  //                 ),
+  //               ),
+  //             ),
+  //           ],
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+
+  Widget _buildRegistrantInfo(Map<String, dynamic> data, dynamic l10n) {
     final registrant = data['registrant'];
     final registrar = data['registrar'];
 
@@ -180,25 +291,58 @@ class _LookupScreenState extends State<LookupScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Registrant Info',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            Text(
+              context.k3voL10n.lookupScreen_registrantInfo,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            Text("Name: ${registrant['name']}"),
-            Text("Email: ${registrant['email']}"),
-            Text("Phone: ${registrant['phone']}"),
-            Text("Country: ${registrant['country']}"),
+            Text(
+              context.k3voL10n.lookupScreen_registrantName(
+                (registrant['name'] ?? '').toString(),
+              ),
+            ),
+            Text(
+              context.k3voL10n.lookupScreen_registrantEmail(
+                (registrant['email'] ?? '').toString(),
+              ),
+            ),
+            Text(
+              context.k3voL10n.lookupScreen_registrantPhone(
+                (registrant['phone'] ?? '').toString(),
+              ),
+            ),
+            Text(
+              context.k3voL10n.lookupScreen_registrantCountry(
+                (registrant['country'] ?? '').toString(),
+              ),
+            ),
             const SizedBox(height: 12),
-            const Text(
-              'Registrar',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            Text(
+              context.k3voL10n.lookupScreen_registrarInfo,
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            Text("Name: ${registrar['name']}"),
-            Text("Email: ${registrar['email']}"),
-            Text("Phone: ${registrar['phone']}"),
+            Text(
+              context.k3voL10n.lookupScreen_registrarName(
+                (registrar['name'] ?? '').toString(),
+              ),
+            ),
+            Text(
+              context.k3voL10n.lookupScreen_registrarEmail(
+                (registrar['email'] ?? '').toString(),
+              ),
+            ),
+            Text(
+              context.k3voL10n.lookupScreen_registrarPhone(
+                (registrar['phone'] ?? '').toString(),
+              ),
+            ),
           ],
         ),
       ),
     );
+  }
+
+  bool _isValidDomainFormat(String domain) {
+    final regex = RegExp(r'^[a-zA-Z0-9-]{1,63}\.[a-zA-Z]{2,}$');
+    return regex.hasMatch(domain);
   }
 }
