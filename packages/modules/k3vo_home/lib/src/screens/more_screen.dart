@@ -132,6 +132,6 @@ class MoreScreen extends StatelessWidget {
   }
 
   void _proceedToSignOut() {
-    getNavigationService().push(AuthRouteNames.auth);
+    getNavigationService().go(AuthRouteNames.auth);
   }
 }

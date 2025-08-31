@@ -60,79 +60,81 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
           ),
         ),
         endPane: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height: 32),
-              K3voListTile(
-                leadingIcon: FontAwesomeIcons.globe,
-                title: context.k3voL10n.visitWebsite,
-                onTap: _proceedToAppWebsite,
-              ),
-              K3voListTile(
-                leadingIcon: FontAwesomeIcons.code,
-                title: context.k3voL10n.aboutTheDeveloper,
-                onTap: _proceedToDeveloperWebsite,
-              ),
-              const SizedBox(height: 24),
-              K3voText(
-                text: context.k3voL10n.legal,
-                type: K3voTextType.labelLarge,
-              ),
-              const SizedBox(height: 8),
-              K3voListTile(
-                leadingIcon: FontAwesomeIcons.scaleBalanced,
-                title: context.k3voL10n.termsOfService,
-                onTap: _proceedToTerms,
-              ),
-              K3voListTile(
-                leadingIcon: Icons.privacy_tip_outlined,
-                title: context.k3voL10n.privacyPolicy,
-                onTap: _proceedToPrivacyPolicy,
-              ),
-              K3voListTile(
-                leadingIcon: Icons.copyright,
-                title: context.k3voL10n.openSourceLicenses,
-                showDivider: true,
-                onTap: () {
-                  showLicensePage(context: context);
-                },
-              ),
-              const SizedBox(height: 24),
-              Center(
-                child: K3voText(
-                  text: context.k3voL10n.madeInKenya,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 32),
+                K3voListTile(
+                  leadingIcon: FontAwesomeIcons.globe,
+                  title: context.k3voL10n.visitWebsite,
+                  onTap: _proceedToAppWebsite,
+                ),
+                K3voListTile(
+                  leadingIcon: FontAwesomeIcons.code,
+                  title: context.k3voL10n.aboutTheDeveloper,
+                  onTap: _proceedToDeveloperWebsite,
+                ),
+                const SizedBox(height: 24),
+                K3voText(
+                  text: context.k3voL10n.legal,
                   type: K3voTextType.labelLarge,
-                  textAlign: TextAlign.center,
                 ),
-              ),
-              const SizedBox(height: 24),
-              Image(
-                height: 120,
-                image: ExactAssetImage(
-                  Assets.images.branding.proudlyKe.keyName,
+                const SizedBox(height: 8),
+                K3voListTile(
+                  leadingIcon: FontAwesomeIcons.scaleBalanced,
+                  title: context.k3voL10n.termsOfService,
+                  onTap: _proceedToTerms,
                 ),
-                fit: BoxFit.contain,
-              ),
-              const SizedBox(height: 24),
-              Center(
-                child: K3voText(
-                  text:
-                      '© ${DateTime.now().year} '
-                      '${context.k3voL10n.appAuthor} '
-                      '(${context.k3voL10n.appAuthorAlias})',
-                  type: K3voTextType.labelLarge,
-                  textAlign: TextAlign.center,
+                K3voListTile(
+                  leadingIcon: Icons.privacy_tip_outlined,
+                  title: context.k3voL10n.privacyPolicy,
+                  onTap: _proceedToPrivacyPolicy,
                 ),
-              ),
-              Center(
-                child: K3voText(
-                  text: context.k3voL10n.allRightsReserved,
-                  type: K3voTextType.labelLarge,
-                  textAlign: TextAlign.center,
+                K3voListTile(
+                  leadingIcon: Icons.copyright,
+                  title: context.k3voL10n.openSourceLicenses,
+                  showDivider: true,
+                  onTap: () {
+                    showLicensePage(context: context);
+                  },
                 ),
-              ),
-            ],
+                const SizedBox(height: 24),
+                Center(
+                  child: K3voText(
+                    text: context.k3voL10n.madeInKenya,
+                    type: K3voTextType.labelLarge,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                const SizedBox(height: 24),
+                Image(
+                  height: 120,
+                  image: ExactAssetImage(
+                    Assets.images.branding.proudlyKe.keyName,
+                  ),
+                  fit: BoxFit.contain,
+                ),
+                const SizedBox(height: 24),
+                Center(
+                  child: K3voText(
+                    text:
+                        '© ${DateTime.now().year} '
+                        '${context.k3voL10n.appAuthor} '
+                        '(${context.k3voL10n.appAuthorAlias})',
+                    type: K3voTextType.labelLarge,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Center(
+                  child: K3voText(
+                    text: context.k3voL10n.allRightsReserved,
+                    type: K3voTextType.labelLarge,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
