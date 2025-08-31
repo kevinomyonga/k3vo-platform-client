@@ -3,7 +3,8 @@
 
 name: Deploy to Firebase Hosting on PR
 
-on: pull_request
+on:
+  pull_request:
 
 permissions:
   checks: write
@@ -15,15 +16,31 @@ jobs:
     if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
     steps:
+      # Checkout code
       - name: Checkout code
         uses: actions/checkout@v4
+
+      # Read Flutter version from .fvmrc
+      - name: Get Flutter version from FVM
+        id: fvm
+        run: |
+          FLUTTER_VERSION=$(cat .fvmrc)
+          echo "FLUTTER_VERSION=$FLUTTER_VERSION" >> $GITHUB_ENV
 
       # Setup Flutter
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: stable
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           cache: true
+
+      # Cache Melos dependencies
+      - name: Cache Melos
+        uses: actions/cache@v3
+        with:
+          path: ~/.pub-cache
+          key: melos-cache-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: melos-cache-
 
       # Install Melos
       - name: Install Melos
@@ -42,7 +59,7 @@ jobs:
       - name: Create .env file
         run: echo "GEMINI_API_KEY=$GEMINI_API_KEY" >> apps/k3vo_app/.env
 
-      # Deploy to Firebase Hosting preview channel
+      # Deploy to Firebase Hosting (preview channel)
       - name: Deploy to Firebase Hosting Preview
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:

@@ -15,18 +15,33 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Setup Flutter (stable) for FVM
+      # Read Flutter version from .fvmrc
+      - name: Get Flutter version from FVM
+        id: fvm
+        run: |
+          FLUTTER_VERSION=$(jq -r '.flutter' .fvmrc)
+          echo "FLUTTER_VERSION=$FLUTTER_VERSION" >> $GITHUB_ENV
+
+      # Setup Flutter
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: stable
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           cache: true
+
+      # Cache Melos dependencies
+      - name: Cache Melos
+        uses: actions/cache@v3
+        with:
+          path: ~/.pub-cache
+          key: melos-cache-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: melos-cache-
 
       # Install Melos
       - name: Install Melos
         run: dart pub global activate melos
 
-      # Bootstrap all packages (runs pub get for apps and packages)
+      # Bootstrap all packages
       - name: Melos Bootstrap
         run: melos bootstrap
 
@@ -35,7 +50,7 @@ jobs:
         run: fvm flutter build web --release
         working-directory: apps/k3vo_app
 
-      # Create .env file (optional, if your app uses env variables)
+      # Create .env file
       - name: Create .env file
         run: echo "GEMINI_API_KEY=$GEMINI_API_KEY" >> apps/k3vo_app/.env
 
