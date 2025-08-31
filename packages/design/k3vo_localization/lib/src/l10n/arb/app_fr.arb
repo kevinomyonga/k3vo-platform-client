@@ -128,5 +128,13 @@
   "swahili": "Swahili",
   "termsOfService": "Conditions d'utilisation",
   "theme": "Thème",
-  "visitWebsite": "Visiter le site web"
+  "visitWebsite": "Visiter le site web",
+  "domainsScreen_deleteTitle": "Supprimer le domaine",
+  "domainsScreen_deleteConfirm": "Êtes-vous sûr de vouloir supprimer {domain} ?",
+  "domainsScreen_deleted": "{domain} supprimé",
+  "cancel": "Annuler",
+  "delete": "Supprimer",
+  "domainsScreen_title": "Domaines enregistrés",
+  "domainsScreen_empty": "Aucun domaine enregistré pour le moment",
+  "suggestionsList_savedToDomains": "Enregistré {domain} dans les Domaines"
 }

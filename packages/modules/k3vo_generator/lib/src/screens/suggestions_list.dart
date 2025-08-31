@@ -99,6 +99,20 @@ class _SuggestionsListState extends State<SuggestionsList> {
           subtitle: rationale != null ? Text(rationale) : null,
           trailing: trailing,
           onTap: () => showRegistrarBottomSheet(context, domain),
+          onLongPress: () {
+            // Store the domain
+            DomainStore.instance.addDomain(
+              Domain(name: domain, rationale: rationale),
+            );
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  context.k3voL10n.suggestionsList_savedToDomains(domain),
+                ),
+              ),
+            );
+          },
         );
       },
     );

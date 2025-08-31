@@ -128,5 +128,13 @@
   "swahili": "Kiswahili",
   "termsOfService": "Masharti ya Huduma",
   "theme": "Mandhari",
-  "visitWebsite": "Tembelea Tovuti"
+  "visitWebsite": "Tembelea Tovuti",
+  "domainsScreen_deleteTitle": "Futa Domain",
+  "domainsScreen_deleteConfirm": "Una uhakika unataka kufuta {domain}?",
+  "domainsScreen_deleted": "Imefutwa {domain}",
+  "cancel": "Ghairi",
+  "delete": "Futa",
+  "domainsScreen_title": "Domains Zilizohifadhiwa",
+  "domainsScreen_empty": "Hakuna domains zilizohifadhiwa bado",
+  "suggestionsList_savedToDomains": "Imehifadhi {domain} kwenye Domains"
 }

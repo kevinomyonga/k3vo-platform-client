@@ -431,4 +431,34 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get visitWebsite => 'Tembelea Tovuti';
+
+  @override
+  String get domainsScreen_deleteTitle => 'Futa Domain';
+
+  @override
+  String domainsScreen_deleteConfirm(Object domain) {
+    return 'Una uhakika unataka kufuta $domain?';
+  }
+
+  @override
+  String domainsScreen_deleted(Object domain) {
+    return 'Imefutwa $domain';
+  }
+
+  @override
+  String get cancel => 'Ghairi';
+
+  @override
+  String get delete => 'Futa';
+
+  @override
+  String get domainsScreen_title => 'Domains Zilizohifadhiwa';
+
+  @override
+  String get domainsScreen_empty => 'Hakuna domains zilizohifadhiwa bado';
+
+  @override
+  String suggestionsList_savedToDomains(Object domain) {
+    return 'Imehifadhi $domain kwenye Domains';
+  }
 }

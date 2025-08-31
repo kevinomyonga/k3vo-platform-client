@@ -431,4 +431,34 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get visitWebsite => 'Visiter le site web';
+
+  @override
+  String get domainsScreen_deleteTitle => 'Supprimer le domaine';
+
+  @override
+  String domainsScreen_deleteConfirm(Object domain) {
+    return 'Êtes-vous sûr de vouloir supprimer $domain ?';
+  }
+
+  @override
+  String domainsScreen_deleted(Object domain) {
+    return '$domain supprimé';
+  }
+
+  @override
+  String get cancel => 'Annuler';
+
+  @override
+  String get delete => 'Supprimer';
+
+  @override
+  String get domainsScreen_title => 'Domaines enregistrés';
+
+  @override
+  String get domainsScreen_empty => 'Aucun domaine enregistré pour le moment';
+
+  @override
+  String suggestionsList_savedToDomains(Object domain) {
+    return 'Enregistré $domain dans les Domaines';
+  }
 }

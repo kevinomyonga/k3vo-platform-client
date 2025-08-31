@@ -128,5 +128,13 @@
   "swahili": "Swahili",
   "termsOfService": "Terms of Service",
   "theme": "Theme",
-  "visitWebsite": "Visit Website"
+  "visitWebsite": "Visit Website",
+  "domainsScreen_deleteTitle": "Delete Domain",
+  "domainsScreen_deleteConfirm": "Are you sure you want to delete {domain}?",
+  "domainsScreen_deleted": "Deleted {domain}",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "domainsScreen_title": "Saved Domains",
+  "domainsScreen_empty": "No domains saved yet",
+  "suggestionsList_savedToDomains": "Saved {domain} to Domains"
 }

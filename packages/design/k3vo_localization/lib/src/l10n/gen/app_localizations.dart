@@ -872,6 +872,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Visit Website'**
   String get visitWebsite;
+
+  /// No description provided for @domainsScreen_deleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Domain'**
+  String get domainsScreen_deleteTitle;
+
+  /// No description provided for @domainsScreen_deleteConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete {domain}?'**
+  String domainsScreen_deleteConfirm(Object domain);
+
+  /// No description provided for @domainsScreen_deleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Deleted {domain}'**
+  String domainsScreen_deleted(Object domain);
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @domainsScreen_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved Domains'**
+  String get domainsScreen_title;
+
+  /// No description provided for @domainsScreen_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'No domains saved yet'**
+  String get domainsScreen_empty;
+
+  /// No description provided for @suggestionsList_savedToDomains.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved {domain} to Domains'**
+  String suggestionsList_savedToDomains(Object domain);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
