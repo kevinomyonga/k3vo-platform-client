@@ -14,11 +14,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      # - run: npm ci
+
       - name: Create .env file
         run: |
           echo "GEMINI_API_KEY=$GEMINI_API_KEY" >> .env
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+
+      - name: Deploy to Firebase Hosting Preview
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_K3VO_PLATFORM }}
