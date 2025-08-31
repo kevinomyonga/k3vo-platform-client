@@ -2,6 +2,7 @@
 # https://github.com/firebase/firebase-tools
 
 name: Deploy to Firebase Hosting on merge
+
 on:
   push:
     branches:
@@ -14,23 +15,32 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install FVM
-        run: dart pub global activate fvm
+      # Setup Flutter (stable) for FVM
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: stable
+          cache: true
 
-      - name: Install Flutter via FVM
-        run: fvm install
+      # Install Melos
+      - name: Install Melos
+        run: dart pub global activate melos
 
-      - name: Set Flutter SDK path
-        run: fvm flutter --version
-
-      - name: Install dependencies for all packages
+      # Bootstrap all packages (runs pub get for apps and packages)
+      - name: Melos Bootstrap
         run: melos bootstrap
 
-      - name: Build Flutter Web for main deploy
+      # Build Flutter Web
+      - name: Build Flutter Web
         run: fvm flutter build web --release
         working-directory: apps/k3vo_app
 
-      - name: Deploy to Firebase Hosting live channel
+      # Create .env file (optional, if your app uses env variables)
+      - name: Create .env file
+        run: echo "GEMINI_API_KEY=$GEMINI_API_KEY" >> apps/k3vo_app/.env
+
+      # Deploy to Firebase Hosting (live)
+      - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
@@ -38,5 +48,3 @@ jobs:
           projectId: k3vo-platform
           entryPoint: apps/k3vo_app
           channelId: live
-        env:
-          FIREBASE_CLI_EXPERIMENTS: webframeworks
