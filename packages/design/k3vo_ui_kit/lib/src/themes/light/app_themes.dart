@@ -21,24 +21,20 @@ class AppThemes {
 
   /// The integer ID for the 'Ryokugyu' color theme.
   /// This theme ID is associated with the teal color scheme.
-  static const int ryokugyu = 0;
+  static const int green = 0;
 
   /// The integer ID for the 'Fujitora' color theme.
   /// This theme ID is associated with the purple color scheme.
   /// used within the application.
-  static const int fujitora = 1;
+  static const int red = 1;
 
   /// The integer ID for the 'Kizaru' color theme.
   /// This theme ID is associated with the amber color scheme.
-  static const int kizaru = 2;
+  static const int black = 2;
 
   /// The integer ID for the 'Aokiji' color theme.
   /// This theme ID is associated with the blue color scheme.
-  static const int aokiji = 3;
-
-  /// The integer ID for the 'Akainu' color theme.
-  /// This theme ID is associated with the red color scheme.
-  static const int akainu = 4;
+  static const int white = 3;
 
   /// Converts a theme ID to its string representation.
   ///
@@ -46,16 +42,14 @@ class AppThemes {
   /// Returns the name of the theme as a [String].
   String toStr(int themeId) {
     switch (themeId) {
-      case ryokugyu:
+      case green:
         return 'Ryokugyu';
-      case fujitora:
+      case red:
         return 'Fujitora';
-      case kizaru:
+      case black:
         return 'Kizaru';
-      case aokiji:
+      case white:
         return 'Aokiji';
-      case akainu:
-        return 'Akainu';
       default:
         return 'Unknown';
     }
@@ -72,50 +66,14 @@ class AppThemes {
     );
   }
 
-  /// Returns the light theme with a teal color scheme.
+  /// Returns the light theme with a green color scheme.
   ///
-  /// Uses [AppColors.primaryTealColor] as the primary color.
-  ThemeData get tealTheme {
+  /// Uses [AppColors.primaryGreenColor] as the primary color.
+  ThemeData get greenTheme {
     final base = themeData;
     return base.copyWith(
       colorScheme: ColorScheme.fromSeed(
-        seedColor: AppColors.primaryTealColor,
-      ),
-    );
-  }
-
-  /// Returns the light theme with a purple color scheme.
-  ///
-  /// Uses [AppColors.primaryPurpleColor] as the primary color.
-  ThemeData get purpleTheme {
-    final base = themeData;
-    return base.copyWith(
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: AppColors.primaryPurpleColor,
-      ),
-    );
-  }
-
-  /// Returns the light theme with an amber color scheme.
-  ///
-  /// Uses [AppColors.primaryAmberColor] as the primary color.
-  ThemeData get amberTheme {
-    final base = themeData;
-    return base.copyWith(
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: AppColors.primaryAmberColor,
-      ),
-    );
-  }
-
-  /// Returns the light theme with a blue color scheme.
-  ///
-  /// Uses a default color scheme.
-  ThemeData get blueTheme {
-    final base = themeData;
-    return base.copyWith(
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: AppColors.primaryBlueColor,
+        seedColor: AppColors.primaryGreenColor,
       ),
     );
   }
@@ -134,16 +92,13 @@ class AppThemes {
 
   /// Provides a collection of themes for the application.
   ///
-  /// Includes themes for teal, purple, amber, blue, and red color schemes.
+  /// Includes themes for green, red, white, and black color schemes.
   /// Sets a fallback theme as [ThemeData.light].
   ThemeCollection get themeCollection {
     return ThemeCollection(
       themes: {
-        ryokugyu: tealTheme,
-        fujitora: purpleTheme,
-        kizaru: amberTheme,
-        aokiji: blueTheme,
-        akainu: redTheme,
+        green: greenTheme,
+        red: redTheme,
       },
       // Optional fallback theme, default value is ThemeData.light()
       fallbackTheme: ThemeData.light(),

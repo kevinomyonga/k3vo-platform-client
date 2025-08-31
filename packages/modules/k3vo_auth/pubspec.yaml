@@ -1,0 +1,26 @@
+name: k3vo_auth
+description: A Flutter package that contains Auth UI components for the K3VO platform client app.
+version: 2025.7.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.8.0
+  flutter: ^3.32.0
+
+dependencies:
+  equatable: ^2.0.7
+  firebase_auth: ^5.7.0
+  flutter:
+    sdk: flutter
+
+  flutter_bloc: ^9.1.1
+  google_sign_in: ^6.2.1
+  k3vo_foundation: ^2025.7.0
+  k3vo_router: ^2025.7.0
+  k3vo_ui_kit: ^2025.7.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.4
+  very_good_analysis: ^9.0.0

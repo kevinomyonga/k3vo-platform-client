@@ -1,8 +1,8 @@
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-import 'package:k3vo_foundation/src/bloc/language/language.dart';
+import 'package:k3vo_auth/k3vo_auth.dart';
+import 'package:k3vo_foundation/k3vo_foundation.dart';
 // import 'package:k3vo_foundation/src/di/injector.config.dart';
-import 'package:k3vo_foundation/src/services/date_formatter.dart';
 import 'package:k3vo_localization/k3vo_localization.dart';
 import 'package:k3vo_router/k3vo_router.dart';
 
@@ -15,16 +15,20 @@ final GetIt getIt = GetIt.instance;
 
 @InjectableInit()
 Future<void> setupDependencies() async {
-  // Run codegen bindings
-  // getIt.init();
-
-  final router = K3voRouter.createRouter();
+  // 1. Register AuthBloc + AuthStatusNotifier
   getIt
-    ..registerSingleton<NavigationService>(NavigationService(router))
-    // Register DateFormatter implementation
+    ..registerLazySingleton<AuthBloc>(AuthBloc.new)
+    ..registerLazySingleton<AuthStatusNotifier>(
+      () => AuthStatusNotifier(getIt<AuthBloc>()),
+    )
     ..registerLazySingleton<DateFormatter>(K3voDateFormatter.new)
-    // Register LanguageCubit implementation
     ..registerLazySingleton<LanguageCubit>(LanguageCubit.new);
+
+  // 2. Now that AuthStatusNotifier exists, create router
+  final router = K3voRouter.createRouter();
+
+  // 3. Register NavigationService with the router
+  getIt.registerSingleton<NavigationService>(NavigationService(router));
 }
 
 /// Internal getter for accessing registered services within foundation.

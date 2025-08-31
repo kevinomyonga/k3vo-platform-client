@@ -10,8 +10,13 @@ class K3voFoundation {
   /// {@macro k3vo_foundation}
   const K3voFoundation();
 
+  static late Env env;
+
   /// Initializes the HydratedBloc storage and dependency injection.
-  static Future<void> initialize() async {
+  static Future<void> initialize({required Env envConfig}) async {
+    // Store env config
+    env = envConfig;
+
     final storage = await HydratedStorage.build(
       storageDirectory: kIsWeb
           ? HydratedStorageDirectory.web

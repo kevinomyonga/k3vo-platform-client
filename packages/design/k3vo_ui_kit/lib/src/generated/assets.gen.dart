@@ -17,6 +17,10 @@ import 'package:vector_graphics/vector_graphics.dart' as _vg;
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// Directory path: assets/images/backgrounds
+  $AssetsImagesBackgroundsGen get backgrounds =>
+      const $AssetsImagesBackgroundsGen();
+
   /// Directory path: assets/images/branding
   $AssetsImagesBrandingGen get branding => const $AssetsImagesBrandingGen();
 
@@ -29,6 +33,17 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [placeholder];
+}
+
+class $AssetsImagesBackgroundsGen {
+  const $AssetsImagesBackgroundsGen();
+
+  /// File path: assets/images/backgrounds/background.jpg
+  AssetGenImage get background =>
+      const AssetGenImage('assets/images/backgrounds/background.jpg');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [background];
 }
 
 class $AssetsImagesBrandingGen {

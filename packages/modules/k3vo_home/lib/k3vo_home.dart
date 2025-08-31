@@ -3,3 +3,4 @@ library;
 
 export 'src/k3vo_home.dart';
 export 'src/screens/screens.dart';
+export 'src/widgets/widgets.dart';

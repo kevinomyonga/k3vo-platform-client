@@ -3,7 +3,7 @@ library;
 
 export 'src/accessors/accessors.dart';
 export 'src/bloc/bloc.dart';
-// export 'src/constants/constants.dart';
+export 'src/constants/constants.dart';
 export 'src/di/di.dart';
 export 'src/extensions/extensions.dart';
 // export 'src/firebase/firebase.dart';

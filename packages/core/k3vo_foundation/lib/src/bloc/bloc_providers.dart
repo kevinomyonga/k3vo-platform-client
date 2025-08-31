@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:k3vo_auth/k3vo_auth.dart';
 import 'package:k3vo_foundation/k3vo_foundation.dart';
 
 class K3voBlocProviders extends StatelessWidget {
@@ -13,6 +14,9 @@ class K3voBlocProviders extends StatelessWidget {
       providers: [
         BlocProvider<LanguageCubit>(
           create: (_) => getIt<LanguageCubit>(),
+        ),
+        BlocProvider<AuthBloc>(
+          create: (_) => getIt<AuthBloc>(),
         ),
       ],
       child: child,

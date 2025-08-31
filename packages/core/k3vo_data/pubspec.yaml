@@ -1,6 +1,6 @@
 name: k3vo_data
 description: A Flutter package for handling data sources (remote + local), repositories, and models in the K3VO platform client app.
-version: 0.1.0+1
+version: 2025.7.0+1
 publish_to: none
 
 environment:
@@ -8,6 +8,7 @@ environment:
   flutter: ^3.32.0
 
 dependencies:
+  dio: ^5.8.0+1
   flutter:
     sdk: flutter
 
