@@ -12,15 +12,24 @@ jobs:
     if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: npm ci
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Create .env file
         run: |
           echo "GEMINI_API_KEY=$GEMINI_API_KEY" >> .env
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.13.0'
+
+      - name: Deploy to Firebase Hosting Preview
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_K3VO_PLATFORM }}
           projectId: k3vo-platform
+          entryPoint: apps/k3vo_app
         env:
           FIREBASE_CLI_EXPERIMENTS: webframeworks
