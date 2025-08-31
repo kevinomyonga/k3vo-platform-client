@@ -43,7 +43,7 @@ jobs:
         run: |
           FLUTTER_VERSION=$(jq -r '.flutter' .fvmrc)
           echo "Flutter version: $FLUTTER_VERSION"
-          fvm install $FLUTTER_VERSION --force
+          fvm install $FLUTTER_VERSION
 
       - name: FVM Flutter Doctor
         run: fvm flutter doctor
