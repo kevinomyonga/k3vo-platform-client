@@ -62,7 +62,7 @@ jobs:
 
       # Build Flutter Web
       - name: Build Flutter Web
-        run: fvm flutter build web --release
+        run: fvm flutter build web --release -t lib/main_production.dart --flavor production
         working-directory: apps/k3vo_app
 
       # Create .env file
