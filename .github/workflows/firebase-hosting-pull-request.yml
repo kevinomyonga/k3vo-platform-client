@@ -19,12 +19,17 @@ jobs:
         run: |
           echo "GEMINI_API_KEY=$GEMINI_API_KEY" >> .env
 
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.13.0'
+
       - name: Deploy to Firebase Hosting Preview
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_K3VO_PLATFORM }}
           projectId: k3vo-platform
-          entryPoint: apps/k3vo_app   # <-- This points the action to your firebase.json location
+          entryPoint: apps/k3vo_app
         env:
           FIREBASE_CLI_EXPERIMENTS: webframeworks
