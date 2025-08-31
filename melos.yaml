@@ -1,7 +1,7 @@
 name: k3vo-platform-client
 repository: https://github.com/kevinomyonga/k3vo-platform-client
 
-sdkPath: .fvm/flutter_sdk # Points to FVM-managed Flutter SDK
+# sdkPath: .fvm/flutter_sdk # Points to FVM-managed Flutter SDK
 
 packages:
   - apps/**

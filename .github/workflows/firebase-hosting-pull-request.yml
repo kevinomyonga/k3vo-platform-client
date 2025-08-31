@@ -44,7 +44,7 @@ jobs:
 
       # Add FVM Flutter to PATH
       - name: Setup FVM Flutter PATH
-        run: echo "${{ github.workspace }}/.fvm/flutter_sdk/bin" >> $GITHUB_PATH
+        run: echo "${{ github.workspace }}/.fvm/flutter_sdk" >> $GITHUB_PATH
 
       # Cache Melos dependencies
       - name: Cache Melos
