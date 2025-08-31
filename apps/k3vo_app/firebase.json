@@ -1,0 +1,66 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "k3vo-platform",
+          "appId": "1:644507664170:android:297068d7f89c2d1ebf2853",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "k3vo-platform",
+          "appId": "1:644507664170:ios:4a22f5ccfa8739a4bf2853",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "k3vo-platform",
+          "configurations": {
+            "android": "1:644507664170:android:297068d7f89c2d1ebf2853",
+            "ios": "1:644507664170:ios:4a22f5ccfa8739a4bf2853",
+            "web": "1:644507664170:web:700fe8b33c7204fcbf2853"
+          }
+        },
+        "lib/src/firebase/env/firebase_options_dev.dart": {
+          "projectId": "k3vo-platform",
+          "configurations": {
+            "android": "1:644507664170:android:98f5b18c6ed0696bbf2853",
+            "ios": "1:644507664170:ios:7c8c195d9891b88dbf2853",
+            "web": "1:644507664170:web:700fe8b33c7204fcbf2853"
+          }
+        },
+        "lib/firebase/firebase_options_stg.dart": {
+          "projectId": "k3vo-platform",
+          "configurations": {
+            "android": "1:644507664170:android:84b00fc35cb95d81bf2853",
+            "ios": "1:644507664170:ios:933ce86f1dfbd4ddbf2853",
+            "web": "1:644507664170:web:700fe8b33c7204fcbf2853"
+          }
+        },
+        "lib/firebase/firebase_options_prod.dart": {
+          "projectId": "k3vo-platform",
+          "configurations": {
+            "android": "1:644507664170:android:297068d7f89c2d1ebf2853",
+            "ios": "1:644507664170:ios:4a22f5ccfa8739a4bf2853",
+            "web": "1:644507664170:web:700fe8b33c7204fcbf2853"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "source": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "frameworksBackend": {
+      "region": "us-central1"
+    }
+  }
+}

@@ -24,14 +24,47 @@ class _HomeShellState extends State<HomeShell> {
 
   void _onDestinationSelected(int index) {
     getNavigationService().go(_routes[index]);
-    setState(() => _currentIndex = index);
+    // don't setState here; index updates via router listener
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    final routerDelegate = getNavigationService().router.routerDelegate
+      ..addListener(_onRouteChanged);
+
+    // Initialize once
+    _updateIndex(routerDelegate.currentConfiguration.uri.toString());
+  }
+
+  void _onRouteChanged() {
+    final routerDelegate = getNavigationService().router.routerDelegate;
+    final location = routerDelegate.currentConfiguration.uri.toString();
+    _updateIndex(location);
+  }
+
+  void _updateIndex(String location) {
+    // Match based on prefix: "/generator/details/123" → "/generator"
+    final index = _routes.indexWhere(
+      (r) => location == r || location.startsWith('$r/'),
+    );
+
+    if (index != -1 && index != _currentIndex) {
+      setState(() => _currentIndex = index);
+    }
+  }
+
+  @override
+  void dispose() {
+    getNavigationService().router.routerDelegate.removeListener(
+      _onRouteChanged,
+    );
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // l10n = context.l10n;
-
-    // Define the destinations once
     final destinations = [
       NavigationDestination(
         icon: const Icon(Icons.home_outlined),
@@ -85,9 +118,7 @@ class _HomeShellState extends State<HomeShell> {
           child: Row(
             children: <Widget>[
               NavigationRail(
-                leading: const K3voLogo(
-                  size: 60,
-                ),
+                leading: const K3voLogo(size: 60),
                 selectedIndex: _currentIndex,
                 onDestinationSelected: _onDestinationSelected,
                 destinations: destinationsNavRail,
@@ -95,9 +126,7 @@ class _HomeShellState extends State<HomeShell> {
                 groupAlignment: 0,
               ),
               const VerticalDivider(thickness: 1, width: 1),
-              Expanded(
-                child: widget.child,
-              ),
+              Expanded(child: widget.child),
             ],
           ),
         ),

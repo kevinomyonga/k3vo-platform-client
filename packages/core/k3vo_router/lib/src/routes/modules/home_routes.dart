@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:k3vo_generator/k3vo_generator.dart';
 import 'package:k3vo_home/k3vo_home.dart';
+import 'package:k3vo_lookup/k3vo_lookup.dart';
 import 'package:k3vo_router/k3vo_router.dart';
 
 final homeRoutes = [

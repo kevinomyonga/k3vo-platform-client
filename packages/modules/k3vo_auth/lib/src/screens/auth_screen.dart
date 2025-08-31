@@ -54,7 +54,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Welcome',
+                          'K3VO',
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w500,
@@ -63,7 +63,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         ),
                         SizedBox(height: 10),
                         Text(
-                          'Welcome to K3vo. Your ideas, domains, simplified.',
+                          'Your ideas, domains, simplified.',
                           style: TextStyle(color: Colors.white70, fontSize: 18),
                           textAlign: TextAlign.center,
                         ),
@@ -74,51 +74,45 @@ class _AuthScreenState extends State<AuthScreen> {
                   Row(
                     children: [
                       const SizedBox(width: 10),
+                      // Expanded(
+                      //   child: OutlinedButton(
+                      //     style: OutlinedButton.styleFrom(
+                      //       shape: RoundedRectangleBorder(
+                      //         borderRadius: BorderRadius.circular(20),
+                      //       ),
+                      //     ),
+                      //     onPressed: () => _showForm(1),
+                      //     child: const Text('Login'),
+                      //   ),
+                      // ),
                       Expanded(
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red,
-                            foregroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
+                        child: FloatingActionButton.extended(
+                          heroTag: 'login',
+                          tooltip: 'Login',
                           onPressed: () => _showForm(1),
-                          child: const Text('Login'),
+                          label: const Text('Sign In'),
                         ),
                       ),
                       const SizedBox(width: 10),
                       Expanded(
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.grey.shade700,
-                            foregroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
+                        child: FloatingActionButton.extended(
+                          heroTag: 'register',
+                          tooltip: 'Register',
                           onPressed: () => _showForm(2),
-                          child: const Text('Signup'),
+                          label: const Text('Sign Up'),
                         ),
                       ),
                       const SizedBox(width: 10),
                     ],
                   ),
                   const SizedBox(height: 20),
-                  OutlinedButton.icon(
-                    style: OutlinedButton.styleFrom(
-                      side: const BorderSide(color: Colors.red),
-                      backgroundColor: Colors.red,
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                    icon: const Icon(FontAwesomeIcons.google),
-                    label: const Text('Continue with Google'),
-                    onPressed: () {
-                      context.read<AuthBloc>().add(GoogleSignInRequested());
-                    },
+                  K3voText(
+                    text:
+                        '© ${DateTime.now().year} '
+                        '${context.k3voL10n.appAuthor} '
+                        '(${context.k3voL10n.appAuthorAlias})',
+                    type: K3voTextType.labelLarge,
+                    textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 20),
                 ],
@@ -145,7 +139,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           children: [
                             _toggleButton('Login', 1),
                             const SizedBox(width: 10),
-                            _toggleButton('Signup', 2),
+                            _toggleButton('Register', 2),
                             const SizedBox(width: 10),
                             _toggleButton('Forgot', 3),
                             const SizedBox(width: 10),
@@ -178,10 +172,12 @@ class _AuthScreenState extends State<AuthScreen> {
 
   Widget _toggleButton(String text, int index) {
     final isSelected = formsIndex == index;
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
+    return OutlinedButton(
+      style: OutlinedButton.styleFrom(
         foregroundColor: isSelected ? Colors.white : Colors.black,
-        backgroundColor: isSelected ? Colors.red : Colors.white,
+        backgroundColor: isSelected
+            ? Theme.of(context).primaryColor
+            : Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
@@ -214,51 +210,53 @@ class LoginForm extends StatelessWidget {
           ).showSnackBar(SnackBar(content: Text(state.message)));
         }
       },
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: emailController,
-              decoration: const InputDecoration(
-                hintText: 'Email',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 10),
-            TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(
-                hintText: 'Password',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 10),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+      child: Card(
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          // decoration: BoxDecoration(
+          //   color: Colors.white,
+          //   borderRadius: BorderRadius.circular(16),
+          // ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: emailController,
+                decoration: const InputDecoration(
+                  hintText: 'Email',
+                  border: OutlineInputBorder(),
                 ),
               ),
-              onPressed: () {
-                context.read<AuthBloc>().add(
-                  EmailSignInRequested(
-                    emailController.text,
-                    passwordController.text,
+              const SizedBox(height: 10),
+              TextField(
+                controller: passwordController,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  hintText: 'Password',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 10),
+              OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  // backgroundColor: Colors.red,
+                  // foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                );
-              },
-              child: const Text('Login'),
-            ),
-          ],
+                ),
+                onPressed: () {
+                  context.read<AuthBloc>().add(
+                    EmailSignInRequested(
+                      emailController.text,
+                      passwordController.text,
+                    ),
+                  );
+                },
+                child: const Text('Login'),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -287,66 +285,68 @@ class SignupForm extends StatelessWidget {
           ).showSnackBar(SnackBar(content: Text(state.message)));
         }
       },
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: emailController,
-              decoration: const InputDecoration(
-                hintText: 'Email',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 10),
-            TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(
-                hintText: 'Password',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 10),
-            TextField(
-              controller: confirmController,
-              obscureText: true,
-              decoration: const InputDecoration(
-                hintText: 'Confirm Password',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 10),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+      child: Card(
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          // decoration: BoxDecoration(
+          //   color: Colors.white,
+          //   borderRadius: BorderRadius.circular(16),
+          // ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: emailController,
+                decoration: const InputDecoration(
+                  hintText: 'Email',
+                  border: OutlineInputBorder(),
                 ),
               ),
-              onPressed: () {
-                if (passwordController.text != confirmController.text) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Passwords do not match')),
-                  );
-                  return;
-                }
-                context.read<AuthBloc>().add(
-                  EmailSignUpRequested(
-                    emailController.text,
-                    passwordController.text,
+              const SizedBox(height: 10),
+              TextField(
+                controller: passwordController,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  hintText: 'Password',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: confirmController,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  hintText: 'Confirm Password',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 10),
+              OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  // backgroundColor: Colors.red,
+                  // foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                );
-              },
-              child: const Text('Signup'),
-            ),
-          ],
+                ),
+                onPressed: () {
+                  if (passwordController.text != confirmController.text) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Passwords do not match')),
+                    );
+                    return;
+                  }
+                  context.read<AuthBloc>().add(
+                    EmailSignUpRequested(
+                      emailController.text,
+                      passwordController.text,
+                    ),
+                  );
+                },
+                child: const Text('Signup'),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -372,39 +372,41 @@ class ForgotPasswordForm extends StatelessWidget {
           ).showSnackBar(SnackBar(content: Text(state.message)));
         }
       },
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: emailController,
-              decoration: const InputDecoration(
-                hintText: 'Enter your email',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 10),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+      child: Card(
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          // decoration: BoxDecoration(
+          //   color: Colors.white,
+          //   borderRadius: BorderRadius.circular(16),
+          // ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: emailController,
+                decoration: const InputDecoration(
+                  hintText: 'Enter your email',
+                  border: OutlineInputBorder(),
                 ),
               ),
-              onPressed: () {
-                context.read<AuthBloc>().add(
-                  PasswordResetRequested(emailController.text),
-                );
-              },
-              child: const Text('Send Reset Email'),
-            ),
-          ],
+              const SizedBox(height: 10),
+              OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  // backgroundColor: Colors.red,
+                  // foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+                onPressed: () {
+                  context.read<AuthBloc>().add(
+                    PasswordResetRequested(emailController.text),
+                  );
+                },
+                child: const Text('Send Reset Email'),
+              ),
+            ],
+          ),
         ),
       ),
     );

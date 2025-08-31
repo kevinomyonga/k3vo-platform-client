@@ -2,5 +2,6 @@
 library;
 
 export 'src/bloc/bloc.dart';
+export 'src/interface/interface.dart';
 export 'src/k3vo_auth.dart';
 export 'src/screens/screens.dart';
