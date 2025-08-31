@@ -107,14 +107,22 @@ class _GeneratorWizardScreenState extends State<GeneratorWizardScreen> {
             _buildStepTitle('4. Location:'),
             TextField(
               controller: locationController,
-              decoration: const InputDecoration(hintText: 'e.g. Nairobi'),
+              decoration: InputDecoration(
+                hintText: 'e.g. Nairobi',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
             ),
 
             _buildStepTitle('5. Keyword (idea):'),
             TextField(
               controller: keywordController,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 hintText: 'e.g. agriculture, fintech',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
             ),
 
@@ -130,7 +138,11 @@ class _GeneratorWizardScreenState extends State<GeneratorWizardScreen> {
                   )
                   .toList(),
               onChanged: (value) => setState(() => language = value),
-              decoration: const InputDecoration(border: OutlineInputBorder()),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
             ),
 
             const SizedBox(height: 24),

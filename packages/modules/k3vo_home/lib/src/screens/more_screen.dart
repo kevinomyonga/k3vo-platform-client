@@ -21,10 +21,6 @@ class MoreScreen extends StatelessWidget {
                 children: [
                   _buildProfileSection(context),
                   const SizedBox(height: 24),
-                  _buildAccountSection(context),
-                  const SizedBox(height: 24),
-                  _buildSecuritySection(context),
-                  const SizedBox(height: 24),
                   _buildOtherActionsSection(context),
                 ],
               ),
@@ -70,58 +66,6 @@ class MoreScreen extends StatelessWidget {
         const K3voText(
           text: 'kevin@motybase.com',
           type: K3voTextType.bodyMedium,
-        ),
-      ],
-    );
-  }
-
-  Widget _buildAccountSection(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const K3voText(
-          text: 'Account',
-          type: K3voTextType.labelLarge,
-        ),
-        const SizedBox(height: 8),
-        K3voListTile(
-          leadingIcon: Icons.person,
-          title: 'Personal Information',
-          onTap: () {},
-        ),
-        K3voListTile(
-          leadingIcon: FontAwesomeIcons.commentDots,
-          title: context.k3voL10n.reviews,
-          onTap: () {},
-        ),
-        K3voListTile(
-          leadingIcon: Icons.group,
-          title: 'Emergency Contacts',
-          onTap: () {},
-        ),
-      ],
-    );
-  }
-
-  Widget _buildSecuritySection(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const K3voText(
-          text: 'Security',
-          type: K3voTextType.labelLarge,
-        ),
-        const SizedBox(height: 8),
-        K3voListTile(
-          leadingIcon: Icons.lock,
-          title: 'Change Password',
-          onTap: () {},
-        ),
-        K3voListTile(
-          leadingIcon: Icons.fingerprint,
-          title: 'Biometric Login',
-          switchValue: true,
-          onSwitchChanged: (value) {},
         ),
       ],
     );

@@ -37,7 +37,6 @@ class _LookupScreenState extends State<LookupScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Domain Lookup'),
-        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),

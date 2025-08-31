@@ -49,12 +49,16 @@ class $AssetsImagesBackgroundsGen {
 class $AssetsImagesBrandingGen {
   const $AssetsImagesBrandingGen();
 
+  /// File path: assets/images/branding/logo.png
+  AssetGenImage get logo =>
+      const AssetGenImage('assets/images/branding/logo.png');
+
   /// File path: assets/images/branding/proudly_ke.png
   AssetGenImage get proudlyKe =>
       const AssetGenImage('assets/images/branding/proudly_ke.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [proudlyKe];
+  List<AssetGenImage> get values => [logo, proudlyKe];
 }
 
 class $AssetsImagesIconsGen {

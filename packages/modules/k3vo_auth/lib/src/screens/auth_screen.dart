@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:k3vo_auth/k3vo_auth.dart';
 import 'package:k3vo_foundation/k3vo_foundation.dart';
 import 'package:k3vo_router/k3vo_router.dart';
@@ -46,76 +45,101 @@ class _AuthScreenState extends State<AuthScreen> {
             ),
             child: ColoredBox(
               color: Colors.black54,
-              child: Column(
-                children: [
-                  const SizedBox(height: kToolbarHeight + 40),
-                  const Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'K3VO',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 30,
-                          ),
+              child: Center(
+                child: SingleChildScrollView(
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      final height = constraints.maxHeight > 800
+                          ? 700.0
+                          : 700.0;
+                      return ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxHeight: height,
                         ),
-                        SizedBox(height: 10),
-                        Text(
-                          'Your ideas, domains, simplified.',
-                          style: TextStyle(color: Colors.white70, fontSize: 18),
-                          textAlign: TextAlign.center,
+                        child: Column(
+                          children: [
+                            const SizedBox(height: kToolbarHeight),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ConstrainedBox(
+                                  constraints: const BoxConstraints(
+                                    maxWidth: 300,
+                                  ),
+                                  child: const K3voLogo(),
+                                ),
+                                const SizedBox(height: 10),
+                                const Text(
+                                  'Your ideas, domains, simplified.',
+                                  style: TextStyle(
+                                    color: Colors.white70,
+                                    fontSize: 18,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ),
+                            const Spacer(),
+                            const SizedBox(height: 10),
+                            LayoutBuilder(
+                              builder: (context, constraints) {
+                                final width = constraints.maxWidth > 500
+                                    ? 400.0
+                                    : constraints.maxWidth * 0.9;
+                                return ConstrainedBox(
+                                  constraints: BoxConstraints(maxWidth: width),
+                                  child: Row(
+                                    children: [
+                                      const SizedBox(width: 10),
+                                      Expanded(
+                                        child: FloatingActionButton.extended(
+                                          heroTag: 'login',
+                                          tooltip: 'Login',
+                                          onPressed: () => _showForm(1),
+                                          label: const Text('Sign In'),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 10),
+                                      Expanded(
+                                        child: FloatingActionButton.extended(
+                                          heroTag: 'register',
+                                          tooltip: 'Register',
+                                          onPressed: () => _showForm(2),
+                                          label: const Text('Sign Up'),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 10),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                            const SizedBox(height: 20),
+
+                            const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                K3voLanguageSwitcherButton(
+                                  showLabel: true,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 20),
+                            K3voText(
+                              text:
+                                  '© ${DateTime.now().year} '
+                                  '${context.k3voL10n.appAuthor} '
+                                  '(${context.k3voL10n.appAuthorAlias})',
+                              type: K3voTextType.labelLarge,
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 20),
+                          ],
                         ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
-                  const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      const SizedBox(width: 10),
-                      // Expanded(
-                      //   child: OutlinedButton(
-                      //     style: OutlinedButton.styleFrom(
-                      //       shape: RoundedRectangleBorder(
-                      //         borderRadius: BorderRadius.circular(20),
-                      //       ),
-                      //     ),
-                      //     onPressed: () => _showForm(1),
-                      //     child: const Text('Login'),
-                      //   ),
-                      // ),
-                      Expanded(
-                        child: FloatingActionButton.extended(
-                          heroTag: 'login',
-                          tooltip: 'Login',
-                          onPressed: () => _showForm(1),
-                          label: const Text('Sign In'),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: FloatingActionButton.extended(
-                          heroTag: 'register',
-                          tooltip: 'Register',
-                          onPressed: () => _showForm(2),
-                          label: const Text('Sign Up'),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  K3voText(
-                    text:
-                        '© ${DateTime.now().year} '
-                        '${context.k3voL10n.appAuthor} '
-                        '(${context.k3voL10n.appAuthorAlias})',
-                    type: K3voTextType.labelLarge,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 20),
-                ],
+                ),
               ),
             ),
           ),

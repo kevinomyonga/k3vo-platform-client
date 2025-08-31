@@ -91,9 +91,11 @@ class GeminiService {
 
     final prompt =
         '''
-Generate 10 unique domain name suggestions for a ${opts.useCase.toLowerCase()} idea based in ${opts.location}.
-The names should be ${opts.length.toLowerCase()}, ${opts.style.toLowerCase()}, and relate to the keyword \\"${opts.keyword}\\".
-Return the results as a JSON array under the key domain_suggestions. Each item should have \\"domain\\" and \\"rationale\\" fields.
+Generate 10 unique domain name suggestions making use of the Kenya Top-Level Domains (TLDs) like .ke, .co.ke, .me.ke, .or.ke, .info.ke, .biz.ke etc (depending on the context) for a ${opts.useCase.toLowerCase()} idea based in ${opts.location}.
+The names should be ${opts.length.toLowerCase()}, ${opts.style.toLowerCase()}, 
+and relate to the keyword \\"${opts.keyword}\\".
+Return the results as a JSON array under the key domain_suggestions. Each item 
+should have \\"domain\\" and \\"rationale\\" fields.
 Do not include any explanation or markdown formatting. Just return JSON.
 $langPrompt
 ''';

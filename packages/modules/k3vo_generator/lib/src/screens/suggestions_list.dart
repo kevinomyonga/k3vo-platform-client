@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:k3vo_ui_kit/k3vo_ui_kit.dart';
 
 class SuggestionsList extends StatelessWidget {
   const SuggestionsList({
@@ -22,7 +23,10 @@ class SuggestionsList extends StatelessWidget {
         final rationale = suggestion['rationale'] as String?;
 
         return ListTile(
-          title: Text(domain),
+          title: K3voText(
+            text: domain,
+            fontWeight: FontWeight.bold,
+          ),
           subtitle: rationale != null ? Text(rationale) : null,
           trailing: ElevatedButton(
             onPressed: () => onCheckAvailability(domain),

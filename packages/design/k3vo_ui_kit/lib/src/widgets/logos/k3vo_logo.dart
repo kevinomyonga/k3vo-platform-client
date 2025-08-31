@@ -27,7 +27,7 @@ class K3voLogo extends StatelessWidget {
     final brightness = Theme.of(context).brightness;
     final isDark = brightness == Brightness.dark;
 
-    final logoPath = Assets.images.branding.proudlyKe.keyName;
+    final logoPath = Assets.images.branding.logo.keyName;
 
     /// Base logo widget
     Widget logo = Image.asset(
@@ -47,8 +47,8 @@ class K3voLogo extends StatelessWidget {
     if (color == null) {
       logo = Image.asset(
         isDark
-            ? Assets.images.branding.proudlyKe.keyName
-            : Assets.images.branding.proudlyKe.keyName,
+            ? Assets.images.branding.logo.keyName
+            : Assets.images.branding.logo.keyName,
         fit: BoxFit.contain,
         width: size,
         height: size,
