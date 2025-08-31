@@ -12,8 +12,9 @@ jobs:
     if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: npm ci
+      - name: Checkout code
+        uses: actions/checkout@v4
+      # - run: npm ci
       - name: Create .env file
         run: |
           echo "GEMINI_API_KEY=$GEMINI_API_KEY" >> .env
