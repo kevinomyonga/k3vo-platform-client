@@ -91,7 +91,10 @@ class GeminiService {
 
     final prompt =
         '''
-Generate 10 unique domain name suggestions making use of the Kenya Top-Level Domains (TLDs) like .ke, .co.ke, .me.ke, .or.ke, .info.ke, .biz.ke etc (depending on the context) for a ${opts.useCase.toLowerCase()} idea based in ${opts.location}.
+Generate 10 unique domain name suggestions making use of the Kenya Top-Level 
+Domains (TLDs) extensions like .ke, .co.ke, .or.ke, .ne.ke, .go.ke, .me.ke, 
+.mobi.ke, .info.ke, .sc.ke, .ac.ke etc (depending on the context) for a 
+${opts.useCase.toLowerCase()} idea based in ${opts.location}.
 The names should be ${opts.length.toLowerCase()}, ${opts.style.toLowerCase()}, 
 and relate to the keyword \\"${opts.keyword}\\".
 Return the results as a JSON array under the key domain_suggestions. Each item 
