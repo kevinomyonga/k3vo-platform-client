@@ -12,9 +12,7 @@ class DiscoverScreen extends StatefulWidget {
 }
 
 class _DiscoverScreenState extends State<DiscoverScreen> {
-  // Use the official KeNIC YouTube Channel ID
   final String _keNicChannelId = 'UCfpfyvDcBZn5YLP7hj1z2Ug';
-
   late Future<List<Video>> _videosFuture;
 
   @override
@@ -29,7 +27,6 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
       final channel = await yt.channels.get(_keNicChannelId);
       final uploadsPlaylistId = channel.id;
       final videoList =
-          // await yt.playlists.getVideos(uploadsPlaylistId).take(3).toList();
           await yt.channels.getUploads(uploadsPlaylistId).take(5).toList();
       return videoList;
     } finally {
@@ -37,13 +34,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
     }
   }
 
-  // This method is called by the RefreshIndicator to update the videos.
   Future<void> _refreshVideos() async {
-    // Re-assign the future to trigger a rebuild with the loading indicator.
     setState(() {
       _videosFuture = _fetchLatestKeNicVideos();
     });
-    // Wait for the new future to complete before the refresh indicator disappears.
     await _videosFuture;
   }
 
@@ -61,10 +55,11 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Quick Action Buttons
-                  const Text(
-                    'Quick Actions',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  /// Quick Actions
+                  Text(
+                    context.k3voL10n.discover_quickActions,
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12),
                   Row(
@@ -78,22 +73,18 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                           ),
                           child: InkWell(
                             onTap: () {
-                              getNavigationService().push(
-                                HomeRouteNames.generator,
-                              );
+                              getNavigationService()
+                                  .push(HomeRouteNames.generator);
                             },
                             borderRadius: BorderRadius.circular(12),
-                            child: const Padding(
-                              padding: EdgeInsets.all(16),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
                               child: Column(
                                 children: [
-                                  Icon(
-                                    Icons.lightbulb_outline,
-                                    size: 40,
-                                  ),
-                                  SizedBox(height: 8),
+                                  const Icon(Icons.lightbulb_outline, size: 40),
+                                  const SizedBox(height: 8),
                                   Text(
-                                    'Generate Names',
+                                    context.k3voL10n.discover_generateNames,
                                     textAlign: TextAlign.center,
                                   ),
                                 ],
@@ -111,22 +102,17 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                           ),
                           child: InkWell(
                             onTap: () {
-                              getNavigationService().push(
-                                HomeRouteNames.search,
-                              );
+                              getNavigationService().push(HomeRouteNames.search);
                             },
                             borderRadius: BorderRadius.circular(12),
-                            child: const Padding(
-                              padding: EdgeInsets.all(16),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
                               child: Column(
                                 children: [
-                                  Icon(
-                                    Icons.search_outlined,
-                                    size: 40,
-                                  ),
-                                  SizedBox(height: 8),
+                                  const Icon(Icons.search_outlined, size: 40),
+                                  const SizedBox(height: 8),
                                   Text(
-                                    'Lookup Domains',
+                                    context.k3voL10n.discover_lookupDomains,
                                     textAlign: TextAlign.center,
                                   ),
                                 ],
@@ -139,10 +125,11 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                   ),
                   const SizedBox(height: 30),
 
-                  // My Tracked Domains Summary (Placeholder)
-                  const Text(
-                    'Your Tracked Domains',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  /// My Tracked Domains
+                  Text(
+                    context.k3voL10n.discover_trackedDomains,
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12),
                   Card(
@@ -155,13 +142,13 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'You are tracking 5 domains.',
-                            style: TextStyle(fontSize: 16),
+                          Text(
+                            context.k3voL10n.discover_trackingCount(5),
+                            style: const TextStyle(fontSize: 16),
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            '2 domains expiring in the next 30 days.',
+                            context.k3voL10n.discover_expiringSoon(2, 30),
                             style: TextStyle(
                               color: Theme.of(context).colorScheme.primary,
                             ),
@@ -171,11 +158,11 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             alignment: Alignment.centerRight,
                             child: TextButton(
                               onPressed: () {
-                                getNavigationService().push(
-                                  HomeRouteNames.myDomains,
-                                );
+                                getNavigationService()
+                                    .push(HomeRouteNames.myDomains);
                               },
-                              child: const Text('View All Domains'),
+                              child:
+                                  Text(context.k3voL10n.discover_viewAllDomains),
                             ),
                           ),
                         ],
@@ -184,14 +171,15 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                   ),
                   const SizedBox(height: 30),
 
-                  // Latest from KeNIC (YouTube Video Section)
-                  const Text(
-                    'Latest from KeNIC',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  /// Latest from KeNIC
+                  Text(
+                    context.k3voL10n.discover_latestFromKenic,
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 12),
                   SizedBox(
-                    height: 250, // Fixed height for horizontal list
+                    height: 250,
                     child: FutureBuilder<List<Video>>(
                       future: _videosFuture,
                       builder: (context, snapshot) {
@@ -201,15 +189,17 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             child: CircularProgressIndicator(),
                           );
                         } else if (snapshot.hasError) {
-                          return const Center(
+                          return Center(
                             child: Text(
-                              'Failed to load videos.',
-                              style: TextStyle(color: Colors.red),
+                              context.k3voL10n.discover_videoError,
+                              style: const TextStyle(color: Colors.red),
                             ),
                           );
                         } else if (!snapshot.hasData ||
                             snapshot.data!.isEmpty) {
-                          return const Center(child: Text('No videos found.'));
+                          return Center(
+                            child: Text(context.k3voL10n.discover_noVideos),
+                          );
                         } else {
                           final videos = snapshot.data!;
                           return ListView.builder(
@@ -228,7 +218,8 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                     child: Card(
                                       elevation: 2,
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(12),
+                                        borderRadius:
+                                            BorderRadius.circular(12),
                                       ),
                                       clipBehavior: Clip.antiAlias,
                                       child: Column(
@@ -242,18 +233,18 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                             fit: BoxFit.cover,
                                             errorBuilder:
                                                 (context, error, stackTrace) {
-                                                  return Container(
-                                                    height: 150,
-                                                    color: Colors.grey[300],
-                                                    child: const Center(
-                                                      child: Icon(
-                                                        Icons.broken_image,
-                                                        size: 50,
-                                                        color: Colors.grey,
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
+                                              return Container(
+                                                height: 150,
+                                                color: Colors.grey[300],
+                                                child: const Center(
+                                                  child: Icon(
+                                                    Icons.broken_image,
+                                                    size: 50,
+                                                    color: Colors.grey,
+                                                  ),
+                                                ),
+                                              );
+                                            },
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.all(12),

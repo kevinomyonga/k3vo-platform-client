@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  k3vo_data: ^2025.7.0
   k3vo_foundation: ^2025.7.0
   k3vo_router: ^2025.7.0
   k3vo_ui_kit: ^2025.7.0

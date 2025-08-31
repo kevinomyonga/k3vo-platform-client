@@ -1,6 +1,6 @@
 # K3VO Platform Client
 
-**Cross-platform Flutter app for domain management and trust insights, built for KeNIC's Hack-A-Milli competition.**
+**Cross-platform Flutter app for domain management and trust insights, built for KeNIC Hack-A-Milli 2025.**
 
 ## 🏆 Built for: KeNIC Hack-A-Milli 2025
 
@@ -14,63 +14,86 @@ This project was submitted as part of the [KeNIC Hack-A-Milli Competition](https
 
 ## 🧩 Overview
 
-K3VO is a mobile and web Flutter application designed to:
+K3VO is a cross-platform Flutter application (mobile + web) that enables users to:
 
-- Perform real-time WHOIS lookups
-- Display domain trust indicators
-- Show licensed KeNIC registrars and their details
+- Perform real-time WHOIS lookups  
+- Display domain trust and reputation indicators  
+- Show licensed KeNIC registrars and their details  
 - Empower users to make safe, informed domain decisions
 
-This client interfaces with the [`k3vo-platform`](https://github.com/kevinomyonga/k3vo-platform) Go + Next.js backend API.
+The client communicates with the [`k3vo-platform`](https://api.k3vo.me.ke:8080/swagger/) backend (Go + Next.js API).
 
 ---
 
-## 🚀 Features
+## 🚀 Key Features
 
-✅ WHOIS data lookup  
-✅ Domain reputation & trust signals  
-✅ View KeNIC-accredited registrars  
-✅ Mobile and web support via Flutter  
-✅ Optimized for Hack-A-Milli 2025 judging
+- ✅ WHOIS data lookup  
+- ✅ Domain reputation & trust signals  
+- ✅ View KeNIC-accredited registrars  
+- ✅ Domain management & registration support  
+- ✅ Multi-language support: English, Swahili, French  
+- ✅ Cross-platform: Mobile & Web  
+- ✅ Optimized for Hack-A-Milli judging  
 
 ---
 
-## 📦 Directory Structure
+## 🎥 Demo Video
+
+[![Watch the K3VO Demo](https://img.youtube.com/vi/MDw6e3F-EmA/0.jpg)](https://youtu.be/MDw6e3F-EmA)
+
+---
+
+## 📂 Repository Structure
 
 ```
 .
-├── apps/             # Flutter apps (web, mobile)
-├── packages/         # Shared modules/widgets
-├── scripts/          # Automation or setup scripts
-├── docs/             # Poster and documentation assets
+├── apps/
+│   ├── k3vo-app/    # Flutter mobile app
+│   │   └── releases/  # APK files for Android
+├── packages/          # Shared modules/widgets
+├── scripts/           # Automation or setup scripts
+├── docs/              # Poster, screenshots, documentation
 ├── pubspec.yaml
-└── melos.yaml        # Monorepo config
+└── melos.yaml         # Monorepo configuration
 ```
 
 ---
 
 ## 🛠️ Getting Started
 
+### Prerequisites
+
+- Flutter SDK >=3.x  
+- Dart >=3.x  
+- Android Studio or VS Code  
+
+### Setup
+
 ```bash
 # Install dependencies
 flutter pub get
 
-# Run on mobile
+# Run mobile app
 flutter run
 
-# Run for web
+# Run web app
 flutter run -d chrome
 ```
 
-If using `melos`:
+### Using Melos
 
 ```bash
 melos bootstrap
 ```
+
+### APK
+
+The latest Android APK is available in:  
+`apps/k3vo-app/releases/K3VO.apk`
 
 ---
 
 ## 📝 License
 
 This project is licensed under the **Apache 2.0 License**.  
-See [`LICENSE`](./LICENSE) for more details.
+See [`LICENSE`](./LICENSE) for details.

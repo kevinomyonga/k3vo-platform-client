@@ -20,7 +20,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>
     on<AuthCheckStatusRequested>(_onCheckStatus);
     on<EmailSignInRequested>(_onEmailSignIn);
     on<EmailSignUpRequested>(_onEmailSignUp);
-    on<GoogleSignInRequested>(_onGoogleSignIn);
     on<PasswordResetRequested>(_onPasswordReset);
     on<SignOutRequested>(_onSignOut);
   }
@@ -68,44 +67,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState>
       emit(AuthSuccess(userCredential.user!));
     } on FirebaseAuthException catch (e) {
       emit(AuthFailure(e.message ?? "Signup failed"));
-    }
-  }
-
-  Future<void> _onGoogleSignIn(
-    GoogleSignInRequested event,
-    Emitter<AuthState> emit,
-  ) async {
-    emit(AuthLoading());
-    try {
-      if (kIsWeb) {
-        // On Web, Firebase handles popup-based Google sign-in
-        GoogleAuthProvider googleProvider = GoogleAuthProvider();
-        final userCredential = await _auth.signInWithPopup(googleProvider);
-        emit(AuthSuccess(userCredential.user!));
-      } else {
-        // Mobile: Android/iOS
-        final GoogleSignInAccount? googleUser = await _googleSignIn
-            .signIn();
-        if (googleUser == null) {
-          emit(const AuthFailure("Google sign-in aborted"));
-          return;
-        }
-
-        final GoogleSignInAuthentication googleAuth =
-            await googleUser.authentication;
-
-        final credential = GoogleAuthProvider.credential(
-          idToken: googleAuth.idToken,
-          accessToken: googleAuth.accessToken,
-        );
-
-        final userCredential = await _auth.signInWithCredential(credential);
-        emit(AuthSuccess(userCredential.user!));
-      }
-    } on FirebaseAuthException catch (e) {
-      emit(AuthFailure(e.message ?? "Google sign-in failed"));
-    } catch (e) {
-      emit(AuthFailure(e.toString()));
     }
   }
 

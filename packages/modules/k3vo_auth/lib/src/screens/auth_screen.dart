@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:k3vo_auth/k3vo_auth.dart';
 import 'package:k3vo_foundation/k3vo_foundation.dart';
 import 'package:k3vo_router/k3vo_router.dart';
 import 'package:k3vo_ui_kit/k3vo_ui_kit.dart';
-// import 'auth_bloc.dart'; // Your AuthBloc implementation
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -46,123 +44,154 @@ class _AuthScreenState extends State<AuthScreen> {
             ),
             child: ColoredBox(
               color: Colors.black54,
-              child: Column(
-                children: [
-                  const SizedBox(height: kToolbarHeight + 40),
-                  const Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'K3VO',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 30,
-                          ),
+              child: Center(
+                child: SingleChildScrollView(
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      final height = constraints.maxHeight > 800
+                          ? 700.0
+                          : 700.0;
+                      return ConstrainedBox(
+                        constraints: BoxConstraints(maxHeight: height),
+                        child: Column(
+                          children: [
+                            const SizedBox(height: kToolbarHeight),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ConstrainedBox(
+                                  constraints: const BoxConstraints(
+                                    maxWidth: 300,
+                                  ),
+                                  child: const K3voLogo(),
+                                ),
+                                const SizedBox(height: 10),
+                                K3voText(
+                                  text: context.k3voL10n.appTagline,
+                                  color: Colors.white70,
+                                  type: K3voTextType.headlineSmall,
+                                ),
+                              ],
+                            ),
+                            const Spacer(),
+                            const SizedBox(height: 10),
+                            LayoutBuilder(
+                              builder: (context, constraints) {
+                                final width = constraints.maxWidth > 500
+                                    ? 400.0
+                                    : constraints.maxWidth * 0.9;
+                                return ConstrainedBox(
+                                  constraints: BoxConstraints(maxWidth: width),
+                                  child: Row(
+                                    children: [
+                                      const SizedBox(width: 10),
+                                      Expanded(
+                                        child: FloatingActionButton.extended(
+                                          heroTag: 'login',
+                                          tooltip: context.k3voL10n.login,
+                                          onPressed: () => _showForm(1),
+                                          label: Text(context.k3voL10n.signIn),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 10),
+                                      Expanded(
+                                        child: FloatingActionButton.extended(
+                                          heroTag: 'register',
+                                          tooltip: context.k3voL10n.register,
+                                          onPressed: () => _showForm(2),
+                                          label: Text(context.k3voL10n.signUp),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 10),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                            const SizedBox(height: 20),
+                            const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                K3voLanguageSwitcherButton(showLabel: true),
+                              ],
+                            ),
+                            const SizedBox(height: 20),
+                            K3voText(
+                              text:
+                                  '© ${DateTime.now().year} '
+                                  '${context.k3voL10n.appAuthor} '
+                                  '(${context.k3voL10n.appAuthorAlias})',
+                              type: K3voTextType.labelLarge,
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 20),
+                          ],
                         ),
-                        SizedBox(height: 10),
-                        Text(
-                          'Your ideas, domains, simplified.',
-                          style: TextStyle(color: Colors.white70, fontSize: 18),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
-                  const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      const SizedBox(width: 10),
-                      // Expanded(
-                      //   child: OutlinedButton(
-                      //     style: OutlinedButton.styleFrom(
-                      //       shape: RoundedRectangleBorder(
-                      //         borderRadius: BorderRadius.circular(20),
-                      //       ),
-                      //     ),
-                      //     onPressed: () => _showForm(1),
-                      //     child: const Text('Login'),
-                      //   ),
-                      // ),
-                      Expanded(
-                        child: FloatingActionButton.extended(
-                          heroTag: 'login',
-                          tooltip: 'Login',
-                          onPressed: () => _showForm(1),
-                          label: const Text('Sign In'),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: FloatingActionButton.extended(
-                          heroTag: 'register',
-                          tooltip: 'Register',
-                          onPressed: () => _showForm(2),
-                          label: const Text('Sign Up'),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  K3voText(
-                    text:
-                        '© ${DateTime.now().year} '
-                        '${context.k3voL10n.appAuthor} '
-                        '(${context.k3voL10n.appAuthorAlias})',
-                    type: K3voTextType.labelLarge,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 20),
-                ],
+                ),
               ),
             ),
           ),
           // Form Overlay
           if (formVisible)
-            Container(
-              color: Colors.black54,
-              alignment: Alignment.center,
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  final width = constraints.maxWidth > 500
-                      ? 400.0
-                      : constraints.maxWidth * 0.9;
-                  return ConstrainedBox(
-                    constraints: BoxConstraints(maxWidth: width),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+            GestureDetector(
+              onTap: _hideForm, // closes overlay when tapping outside
+              child: Container(
+                color: Colors.black54,
+                alignment: Alignment.center,
+                child: GestureDetector(
+                  onTap:
+                      () {}, // prevents tap events from propagating to the outer GestureDetector
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      final width = constraints.maxWidth > 500
+                          ? 400.0
+                          : constraints.maxWidth * 0.9;
+                      return ConstrainedBox(
+                        constraints: BoxConstraints(maxWidth: width),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            _toggleButton('Login', 1),
-                            const SizedBox(width: 10),
-                            _toggleButton('Register', 2),
-                            const SizedBox(width: 10),
-                            _toggleButton('Forgot', 3),
-                            const SizedBox(width: 10),
-                            IconButton(
-                              color: Colors.white,
-                              icon: const Icon(Icons.clear),
-                              onPressed: _hideForm,
+                            SingleChildScrollView(
+                              scrollDirection:
+                                  Axis.horizontal, // scrollable toggle buttons
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  _toggleButton(context.k3voL10n.login, 1),
+                                  const SizedBox(width: 10),
+                                  _toggleButton(context.k3voL10n.register, 2),
+                                  const SizedBox(width: 10),
+                                  _toggleButton(
+                                    context.k3voL10n.forgotPassword,
+                                    3,
+                                  ),
+                                  const SizedBox(width: 10),
+                                  IconButton(
+                                    color: Colors.white,
+                                    icon: const Icon(Icons.clear),
+                                    onPressed: _hideForm,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 300),
+                              child: formsIndex == 1
+                                  ? const LoginForm(key: ValueKey(1))
+                                  : formsIndex == 2
+                                  ? const SignupForm(key: ValueKey(2))
+                                  : const ForgotPasswordForm(key: ValueKey(3)),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 20),
-                        AnimatedSwitcher(
-                          duration: const Duration(milliseconds: 300),
-                          child: formsIndex == 1
-                              ? const LoginForm(key: ValueKey(1))
-                              : formsIndex == 2
-                              ? const SignupForm(key: ValueKey(2))
-                              : const ForgotPasswordForm(key: ValueKey(3)),
-                        ),
-                      ],
-                    ),
-                  );
-                },
+                      );
+                    },
+                  ),
+                ),
               ),
             ),
         ],
@@ -178,9 +207,7 @@ class _AuthScreenState extends State<AuthScreen> {
         backgroundColor: isSelected
             ? Theme.of(context).primaryColor
             : Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
       onPressed: () => setState(() => formsIndex = index),
       child: Text(text),
@@ -189,6 +216,7 @@ class _AuthScreenState extends State<AuthScreen> {
 }
 
 // ------------------- Forms -------------------
+
 class LoginForm extends StatelessWidget {
   const LoginForm({super.key});
 
@@ -200,10 +228,7 @@ class LoginForm extends StatelessWidget {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccess) {
-          // Navigate to app home
-          getNavigationService().push(
-            HomeRouteNames.home,
-          );
+          getNavigationService().push(HomeRouteNames.home);
         } else if (state is AuthFailure) {
           ScaffoldMessenger.of(
             context,
@@ -213,34 +238,28 @@ class LoginForm extends StatelessWidget {
       child: Card(
         child: Container(
           padding: const EdgeInsets.all(16),
-          // decoration: BoxDecoration(
-          //   color: Colors.white,
-          //   borderRadius: BorderRadius.circular(16),
-          // ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: emailController,
-                decoration: const InputDecoration(
-                  hintText: 'Email',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  hintText: context.k3voL10n.email,
+                  border: const OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 10),
               TextField(
                 controller: passwordController,
                 obscureText: true,
-                decoration: const InputDecoration(
-                  hintText: 'Password',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  hintText: context.k3voL10n.password,
+                  border: const OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 10),
               OutlinedButton(
                 style: OutlinedButton.styleFrom(
-                  // backgroundColor: Colors.red,
-                  // foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
@@ -253,7 +272,7 @@ class LoginForm extends StatelessWidget {
                     ),
                   );
                 },
-                child: const Text('Login'),
+                child: Text(context.k3voL10n.login),
               ),
             ],
           ),
@@ -275,10 +294,7 @@ class SignupForm extends StatelessWidget {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is AuthSuccess) {
-          // Navigate to app home
-          getNavigationService().push(
-            HomeRouteNames.home,
-          );
+          getNavigationService().push(HomeRouteNames.home);
         } else if (state is AuthFailure) {
           ScaffoldMessenger.of(
             context,
@@ -288,43 +304,37 @@ class SignupForm extends StatelessWidget {
       child: Card(
         child: Container(
           padding: const EdgeInsets.all(16),
-          // decoration: BoxDecoration(
-          //   color: Colors.white,
-          //   borderRadius: BorderRadius.circular(16),
-          // ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: emailController,
-                decoration: const InputDecoration(
-                  hintText: 'Email',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  hintText: context.k3voL10n.email,
+                  border: const OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 10),
               TextField(
                 controller: passwordController,
                 obscureText: true,
-                decoration: const InputDecoration(
-                  hintText: 'Password',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  hintText: context.k3voL10n.password,
+                  border: const OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 10),
               TextField(
                 controller: confirmController,
                 obscureText: true,
-                decoration: const InputDecoration(
-                  hintText: 'Confirm Password',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  hintText: context.k3voL10n.confirmPassword,
+                  border: const OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 10),
               OutlinedButton(
                 style: OutlinedButton.styleFrom(
-                  // backgroundColor: Colors.red,
-                  // foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
@@ -332,7 +342,9 @@ class SignupForm extends StatelessWidget {
                 onPressed: () {
                   if (passwordController.text != confirmController.text) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Passwords do not match')),
+                      SnackBar(
+                        content: Text(context.k3voL10n.passwordsDoNotMatch),
+                      ),
                     );
                     return;
                   }
@@ -343,7 +355,7 @@ class SignupForm extends StatelessWidget {
                     ),
                   );
                 },
-                child: const Text('Signup'),
+                child: Text(context.k3voL10n.signUp),
               ),
             ],
           ),
@@ -364,7 +376,7 @@ class ForgotPasswordForm extends StatelessWidget {
       listener: (context, state) {
         if (state is AuthSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Password reset email sent')),
+            SnackBar(content: Text(context.k3voL10n.passwordResetEmailSent)),
           );
         } else if (state is AuthFailure) {
           ScaffoldMessenger.of(
@@ -375,25 +387,19 @@ class ForgotPasswordForm extends StatelessWidget {
       child: Card(
         child: Container(
           padding: const EdgeInsets.all(16),
-          // decoration: BoxDecoration(
-          //   color: Colors.white,
-          //   borderRadius: BorderRadius.circular(16),
-          // ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: emailController,
-                decoration: const InputDecoration(
-                  hintText: 'Enter your email',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  hintText: context.k3voL10n.enterYourEmail,
+                  border: const OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 10),
               OutlinedButton(
                 style: OutlinedButton.styleFrom(
-                  // backgroundColor: Colors.red,
-                  // foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
@@ -403,7 +409,7 @@ class ForgotPasswordForm extends StatelessWidget {
                     PasswordResetRequested(emailController.text),
                   );
                 },
-                child: const Text('Send Reset Email'),
+                child: Text(context.k3voL10n.sendResetEmail),
               ),
             ],
           ),
