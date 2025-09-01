@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:k3vo/app/app.dart';
@@ -14,8 +15,11 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // Load .env first
-  await dotenv.load();
+  // Only load .env on non-web platforms
+  if (!kIsWeb) {
+    // Load .env first
+    await dotenv.load();
+  }
 
   // Initialize foundation with DotEnvConfig
   await K3voFoundation.initialize(envConfig: DotEnvConfig());
