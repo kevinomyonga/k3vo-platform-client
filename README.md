@@ -23,7 +23,7 @@ K3VO is a cross-platform Flutter application (mobile + web) that enables users t
 
 The project uses the domain `k3vo.me.ke` and its various features and services are split into:
 
-- [`Backend API`](https://api.k3vo.me.ke:8080/swagger/) built with Go/Golang
+- [`Backend API`](http://api.k3vo.me.ke:8080/swagger/) built with Go/Golang
 - [`Frontend Web App`](https://app.k3vo.me.ke) built with Flutter
 - [`Website`](https://k3vo.me.ke) built with Next.js
 
