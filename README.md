@@ -54,8 +54,7 @@ The project uses the domain `k3vo.me.ke` and its various features and services a
 ```
 .
 ├── apps/
-│   ├── k3vo-app/    # Flutter mobile app
-│   │   └── releases/  # APK files for Android
+│   ├── k3vo-app/      # Flutter mobile app
 ├── packages/          # Shared modules/widgets
 ├── scripts/           # Automation or setup scripts
 ├── docs/              # Poster, screenshots, documentation
