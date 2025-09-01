@@ -63,6 +63,10 @@ jobs:
       - name: Melos Bootstrap
         run: melos bootstrap
 
+      # Create .env file
+      - name: Create .env file
+        run: echo "" >> apps/k3vo_app/.env
+
       # Build Flutter Web with --dart-define
       - name: Build Flutter Web
         run: fvm flutter build web --release -t lib/main_production.dart \
