@@ -65,7 +65,7 @@ The client communicates with the [`k3vo-platform`](https://api.k3vo.me.ke:8080/s
 
 - Flutter SDK >=3.x  
 - Dart >=3.x  
-- Android Studio or VS Code  
+- Android Studio or VS Code (Preferred) 
 
 ### Setup
 
@@ -73,11 +73,11 @@ The client communicates with the [`k3vo-platform`](https://api.k3vo.me.ke:8080/s
 # Install dependencies
 flutter pub get
 
-# Run mobile app
-flutter run
+# Install fvm
+dart pub global activate fvm
 
-# Run web app
-flutter run -d chrome
+# Install Flutter version
+fvm install
 ```
 
 ### Using Melos
@@ -86,10 +86,15 @@ flutter run -d chrome
 melos bootstrap
 ```
 
+### Running the App
+
+To run the app in VS Code, use the launch configuration specified in `.vscode/launch.json`.
+
+You can run the app in different environments (mobile/web) by selecting the appropriate configuration, the desired device, and clicking the run button. Or by pressing `F5`.
+
 ### APK
 
-The latest Android APK is available in:  
-`apps/k3vo-app/releases/K3VO.apk`
+The latest Android APK is available at this link on [Google Drive](https://drive.google.com/file/d/1nCsEGe4jg3vT8f__IOubLH3pYxboM6x4/view?usp=share_link) 
 
 ---
 
