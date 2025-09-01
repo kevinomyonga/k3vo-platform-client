@@ -21,15 +21,21 @@ K3VO is a cross-platform Flutter application (mobile + web) that enables users t
 - Show licensed KeNIC registrars and their details  
 - Empower users to make safe, informed domain decisions
 
-The client communicates with the [`k3vo-platform`](https://api.k3vo.me.ke:8080/swagger/) backend (Go + Next.js API).
+The project uses the domain `k3vo.me.ke` and its various features and services are split into:
+
+- [`Backend API`](https://api.k3vo.me.ke:8080/swagger/) built with Go/Golang
+- [`Frontend Web App`](https://app.k3vo.me.ke) built with Flutter
+- [`Website`](https://k3vo.me.ke) built with Next.js
 
 ---
 
 ## 🚀 Key Features
 
 - ✅ WHOIS data lookup  
+- ✅ Domain availability check  
 - ✅ Domain reputation & trust signals  
 - ✅ View KeNIC-accredited registrars  
+- ✅ AI-powered domain name suggestions 
 - ✅ Domain management & registration support  
 - ✅ Multi-language support: English, Swahili, French  
 - ✅ Cross-platform: Mobile & Web  
@@ -95,6 +101,10 @@ You can run the app in different environments (mobile/web) by selecting the appr
 ### APK
 
 The latest Android APK is available at this link on [Google Drive](https://drive.google.com/file/d/1nCsEGe4jg3vT8f__IOubLH3pYxboM6x4/view?usp=share_link) 
+
+### Web
+
+You can access the web version of the app at [https://app.k3vo.me.ke](https://app.k3vo.me.ke).
 
 ---
 
