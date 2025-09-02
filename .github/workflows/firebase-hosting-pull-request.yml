@@ -85,6 +85,6 @@ jobs:
           projectId: k3vo-platform
           entryPoint: apps/k3vo_app
           channelId: pr${{ github.event.pull_request.number }}
-          expires: 7d
+          expires: 3d
         env:
           FIREBASE_CLI_EXPERIMENTS: webframeworks

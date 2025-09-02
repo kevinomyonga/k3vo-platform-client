@@ -49,6 +49,29 @@ The project uses the domain `k3vo.me.ke` and its various features and services a
 
 ---
 
+## 📸 Screenshots
+
+### Samsung Note 10+
+
+| | | |
+|---|---|---|
+| <img src="./docs/screenshots/Samsung Note 10+/Screenshot_20250831_223421.jpg" width="250"/> | <img src="./docs/screenshots/Samsung Note 10+/Screenshot_20250831_223437.jpg" width="250"/> | <img src="./docs/screenshots/Samsung Note 10+/Screenshot_20250831_223514.jpg" width="250"/> |
+| <img src="./docs/screenshots/Samsung Note 10+/Screenshot_20250831_223524.jpg" width="250"/> | <img src="./docs/screenshots/Samsung Note 10+/Screenshot_20250831_223603.jpg" width="250"/> | <img src="./docs/screenshots/Samsung Note 10+/Screenshot_20250831_223658.jpg" width="250"/> |
+| <img src="./docs/screenshots/Samsung Note 10+/Screenshot_20250831_223715.jpg" width="250"/> | <img src="./docs/screenshots/Samsung Note 10+/Screenshot_20250831_223745.jpg" width="250"/> | <img src="./docs/screenshots/Samsung Note 10+/Screenshot_20250831_223807.jpg" width="250"/> |
+| <img src="./docs/screenshots/Samsung Note 10+/Screenshot_20250831_223827_Android System.jpg" width="250"/> | <img src="./docs/screenshots/Samsung Note 10+/Screenshot_20250831_223850.jpg" width="250"/> | <img src="./docs/screenshots/Samsung Note 10+/Screenshot_20250831_223928.jpg" width="250"/> |
+
+---
+
+### Microsoft Surface Duo  
+
+| | | |
+|---|---|---|
+| <img src="./docs/screenshots/Microsoft Surface Duo/Screenshot_20250831-211653.png" width="250"/> | <img src="./docs/screenshots/Microsoft Surface Duo/Screenshot_20250831-211725.png" width="250"/> | <img src="./docs/screenshots/Microsoft Surface Duo/Screenshot_20250831-211733.png" width="250"/> |
+| <img src="./docs/screenshots/Microsoft Surface Duo/Screenshot_20250831-211809.png" width="250"/> | <img src="./docs/screenshots/Microsoft Surface Duo/Screenshot_20250831-211908.png" width="250"/> | <img src="./docs/screenshots/Microsoft Surface Duo/Screenshot_20250831-211921.png" width="250"/> |
+| <img src="./docs/screenshots/Microsoft Surface Duo/Screenshot_20250831-212117.png" width="250"/> | <img src="./docs/screenshots/Microsoft Surface Duo/Screenshot_20250831-212141.png" width="250"/> |   |
+
+---
+
 ## 📂 Repository Structure
 
 ```
@@ -95,11 +118,22 @@ melos bootstrap
 
 To run the app in VS Code, use the launch configuration specified in `.vscode/launch.json`.
 
-You can run the app in different environments (mobile/web) by selecting the appropriate configuration, the desired device, and clicking the run button. Or by pressing `F5`.
+You can run the app in different environments (mobile (Android/iOS)/web) by selecting the appropriate configuration, the desired device, and clicking the run button. Or by pressing `F5`.
 
 ### APK
 
-The latest Android APK is available at this link on [Google Drive](https://drive.google.com/file/d/1nCsEGe4jg3vT8f__IOubLH3pYxboM6x4/view?usp=share_link) 
+The latest Android APK is available here:  
+
+- 📦 [Download v2025.8.0 (Build 1) from GitHub Releases](https://github.com/kevinomyonga/k3vo-platform-client/releases/download/2025.8.0%2B1/K3VO-v2025.8.0+1.apk)  
+- ☁️ [Google Drive Mirror](https://drive.google.com/file/d/1nCsEGe4jg3vT8f__IOubLH3pYxboM6x4/view?usp=share_link)  
+
+### IPA
+
+⚠️ **Disclaimer**: The K3VO app is fully cross-platform and runs on **iOS** as well.  
+However, to generate and install an iOS build (`.ipa`), you need:  
+- A **macOS machine** (MacBook or Mac Mini)  
+- An active **Apple Developer Account**  
+- Xcode configured for iOS app signing  
 
 ### Web
 
